@@ -5,9 +5,9 @@
     <title>Finance Manager</title>
 	<style>
 		nav, section { margin: 10px;}
-	    body { margin:0; }
+	    body { margin:0; padding:0; }
 		html { background-color: #F8F8F8; }
-		header {  height: 100px }
+		header { height: 100px; background-color: #F2F2F2; }
 		h1 { text-align: center; padding-top: 30px}
 		img.logo { float:left; width:100px; height:100px }
 		div.cabecalho { width: 400px; margin: 0 auto; }
@@ -26,7 +26,20 @@
 			margin-right:10px;
 		}
 		
-		footer { background-color: #000000; color:#FFFFFF; text-align:right; padding: 10px; margin-top:20px; }
+		footer {  
+			background-color: #000000; 
+			color:#FFFFFF; 
+			text-align:right;  
+			padding-top:10px;
+			padding-bottom:10px;
+		
+			width:100%;
+			position:absolute;
+			bottom:0;
+			left:0;
+	
+		}
+		
 
 	</style>
   </head>
