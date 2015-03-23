@@ -39,9 +39,36 @@ nav ul.navegacao {
 	margin: 0;
 	padding: 0;
 }
+
 nav ul.navegacao li {
 	display:inline;
 	margin-right:20px;
+}
+
+nav ul.navegacao li a {
+	text-decoration: none;
+	padding:5px;
+}
+
+/* unvisited link */
+nav ul.navegacao li a:link {
+    color: #2929CC;
+}
+
+/* visited link */
+nav ul.navegacao li a:visited {
+    color: #2929CC;
+}
+
+/* mouse over link */
+nav ul.navegacao li a:hover {
+    color: #333333;
+	background-color:#E6E6E6;
+}
+
+/* selected link */
+nav ul.navegacao li a:active {
+    color: #333333;
 }
 
 section { 
