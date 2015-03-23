@@ -3,45 +3,7 @@
   <head>
 	<meta charset="utf-8">
     <title>Finance Manager</title>
-	<style>
-		nav, section { margin: 10px;}
-	    body { margin:0; padding:0; }
-		html { background-color: #F8F8F8; }
-		header { height: 100px; background-color: #F2F2F2; }
-		h1 { text-align: center; padding-top: 30px}
-		img.logo { float:left; width:100px; height:100px }
-		div.cabecalho { width: 400px; margin: 0 auto; }
-		nav { clear:both }
-		section { min-height: 500px;}
-		#Valores { float:left }
-		#Pendencias { margin-left: 50px; float:left }
-
-		ul.navegacao {
-			list-style-type: none;
-			margin: 0;
-			padding: 0;
-		}
-		ul.navegacao li {
-			display:inline;
-			margin-right:10px;
-		}
-		
-		footer {  
-			background-color: #000000; 
-			color:#FFFFFF; 
-			text-align:right;  
-			padding-top:10px;
-			padding-bottom:10px;
-		
-			width:100%;
-			position:absolute;
-			bottom:0;
-			left:0;
-	
-		}
-		
-
-	</style>
+	<link rel="stylesheet" href="Resourses/Estilos.css">
   </head>
   <body>
 	<header>

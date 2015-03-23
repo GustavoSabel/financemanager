@@ -1,0 +1,74 @@
+body { 
+	margin: 0;
+}
+
+html { 
+	background-color: #F8F8F8; 
+}
+
+header { 
+	height: 100px; background-color: #F2F2F2; 
+}
+
+img.logo { 
+	float:left; 
+	width:100px; 
+	height:100px 
+}
+
+div.cabecalho { 
+	width: 400px; 
+	margin: 0 auto; 
+}
+
+div.cabecalho h1 { 
+	text-align: center; 
+	padding-top: 30px; 
+	margin-top: 0px 
+}
+
+nav { 
+	clear:both; 
+	background-color: red; 
+	padding: 10px;
+	background-color: #DADADA; 
+}
+
+nav ul.navegacao {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+nav ul.navegacao li {
+	display:inline;
+	margin-right:20px;
+}
+
+section { 
+	min-height: 500px;
+	margin-left: 10px; 
+	margin-right: 10px; 
+	margin-top: 10px;
+}
+
+#Valores { 
+	float:left 
+}
+
+#Pendencias { 
+	margin-left: 50px; 
+	float:left 
+}
+
+footer {  
+	background-color: #000000; 
+	color:#FFFFFF; 
+	text-align:right;  
+	padding-top:10px;
+	padding-bottom:10px;
+
+	width:100%;
+	position:absolute;
+	bottom:0;
+	left:0;
+}
