@@ -3,7 +3,7 @@
   <head>
 	<meta charset="utf-8">
     <title>Cadastro de categoria</title>
-	<link rel="stylesheet" href="../Resourses/Estilos.css">
+	<link rel="stylesheet" href="../Resources/Estilos.css">
   </head>
   <body>	
 	<header>
@@ -14,7 +14,9 @@
 	<nav>
 		<ul class="navegacao">
 			<li>
-				<a href="../index.php">Página inicial</a>
+				<a href="../index.php">
+					<img src="../Resourses/Imagens/home-icon_white_64.png" alt="Home" style="width:42px; height:42px; border:0" />
+				</a>
 			</li>
 			<li>
 				<a href="cadastrousuario.php">Cadastro de usuário</a>

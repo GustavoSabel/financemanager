@@ -3,7 +3,7 @@
   <head>
 	<meta charset="utf-8">
     <title>Finance Manager</title>
-	<link rel="stylesheet" href="Resourses/Estilos.css">
+	<link rel="stylesheet" href="Resources/Estilos.css">
   </head>
   <body>
 	<header>
