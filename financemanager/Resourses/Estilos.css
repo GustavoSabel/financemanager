@@ -1,3 +1,7 @@
+html {
+	font-family: Calibri	
+}
+
 body { 
 	margin: 0;
 }
@@ -29,46 +33,49 @@ div.cabecalho h1 {
 
 nav { 
 	clear:both; 
-	background-color: red; 
-	padding: 10px;
-	background-color: #DADADA; 
+	background-color: #5C5C5C; 
 }
 
 nav ul.navegacao {
 	list-style-type: none;
 	margin: 0;
-	padding: 0;
+	padding:5px 0px 5px 0px;
 }
 
 nav ul.navegacao li {
 	display:inline;
-	margin-right:20px;
+	margin:0;
+	padding:0;
 }
 
 nav ul.navegacao li a {
 	text-decoration: none;
-	padding:5px;
+	padding:5px 5px 5px 5px;
 }
 
 /* unvisited link */
 nav ul.navegacao li a:link {
-    color: #2929CC;
+    color: #E6E6E6;
 }
 
 /* visited link */
 nav ul.navegacao li a:visited {
-    color: #2929CC;
+    color: #E6E6E6;
 }
 
 /* mouse over link */
 nav ul.navegacao li a:hover {
-    color: #333333;
-	background-color:#E6E6E6;
+    color: #E6E6E6;
+	background-color:#161616;
 }
 
 /* selected link */
 nav ul.navegacao li a:active {
-    color: #333333;
+    color: #E6E6E6;
+}
+
+input {
+	margin-bottom:5px;
 }
 
 section { 
