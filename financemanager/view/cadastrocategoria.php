@@ -14,12 +14,12 @@
 	<nav>
 		<ul class="navegacao">
 			<li>
-				<a href="../index.php">
-					<img src="../Resourses/Imagens/home-icon_white_64.png" alt="Home" style="width:42px; height:42px; border:0" />
+				<a class="link_img" href="../index.php">
+					<img src="../Resources/Imagens/home-icon_white_64.png" alt="Home" style="width:16px; height:16px; border:0; padding-top:0px;" />
 				</a>
 			</li>
 			<li>
-				<a href="cadastrousuario.php">Cadastro de usuário</a>
+				<a class="link_texto" href="cadastrousuario.php">Cadastro de usuário</a>
 			</li>
 		</ul>
 	</nav>

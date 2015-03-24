@@ -14,10 +14,12 @@
 	<nav>
 		<ul class="navegacao">
 			<li>
-				<a href="../index.php">Página inicial</a>
+				<a class="link_img" href="../index.php">
+					<img src="../Resources/Imagens/home-icon_white_64.png" alt="Home" style="width:16px; height:16px; border:0; padding-top:0px;" />
+				</a>
 			</li>
 			<li>
-				<a href="cadastrocategoria.php">Cadastro de categoria</a>
+				<a class="link_texto" href="cadastrocategoria.php">Cadastro de categoria</a>
 			</li>
 		</ul>
 	</nav>

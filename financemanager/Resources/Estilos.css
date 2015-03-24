@@ -48,7 +48,14 @@ nav ul.navegacao li {
 	padding:0;
 }
 
-nav ul.navegacao li a {
+nav ul.navegacao li a.link_img{
+	text-decoration: none;
+	padding:7px 5px 3px 5px;
+	position:relative;
+	top:2px;
+}
+
+nav ul.navegacao li a.link_texto{
 	text-decoration: none;
 	padding:5px 5px 5px 5px;
 }

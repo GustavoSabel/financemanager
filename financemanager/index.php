@@ -15,10 +15,10 @@
 	<nav>
 		<ul class="navegacao">
 			<li>
-				<a href="view/cadastrousuario.php">Cadastro de usuário</a>
+				<a class="link_texto" href="view/cadastrousuario.php">Cadastro de usuário</a>
 			</li>
 			<li>
-				<a href="view/cadastrocategoria.php">Cadastro de categoria</a>
+				<a class="link_texto" href="view/cadastrocategoria.php">Cadastro de categoria</a>
 			</li>
 		</ul>
 	</nav>
