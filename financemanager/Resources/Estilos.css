@@ -86,7 +86,8 @@ input {
 }
 
 section { 
-	min-height: 500px;
+	/*min-height: 200px;*/
+	height:auto;
 	margin-left: 10px; 
 	margin-right: 10px; 
 	margin-top: 10px;
@@ -113,3 +114,19 @@ footer {
 	bottom:0;
 	left:0;
 }
+
+label.formulario {
+    float: left;
+    text-align: right;
+    padding-right: 10px;
+}
+
+label.usuario {
+    width: 100px; 
+}
+
+label.categoria {
+    width: 100px; 
+}
+
+

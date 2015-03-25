@@ -25,7 +25,7 @@
 	</nav>
 	<section>
 		<form method=post action="../controller/CategoriaController.php">
-			Categoria <input type="text" name="categoria" maxlength="150"/> <br>
+			<label class="formulario categoria" for="categoria">Categoria</label> <input type="text" id="categoria" name="categoria" maxlength="150"/> <br>
 			<input type="submit" name="cadastrar" value="Cadastrar"/> <input type="reset" value="Limpar"/> <br>
 			<input type="hidden" name="operacao" value="salvar"> <br>
 

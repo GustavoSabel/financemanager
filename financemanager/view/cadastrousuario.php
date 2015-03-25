@@ -26,10 +26,10 @@
 	<section>
 		<form method=post action="../controller/UsuarioController.php">
 
-			Nome <input type="text" name="nome" maxlength="150"/> <br>
-			Login <input type="text" name="login" maxlength="50"/> <br>
-			Senha <input type="password" name="senha" maxlength="150"/> <br>
-			Repita a senha <input type="password" name="senhaRepetida" maxlength="150"/> <br>
+			<label class="formulario usuario" for="nome">Nome</label> <input type="text" id="nome" name="nome" maxlength="150"/> <br>
+			<label class="formulario usuario" for="login">Login</label> <input type="text" id="login" name="login" maxlength="50"/> <br>
+			<label class="formulario usuario" for="senha">Senha</label> <input type="password" id="senha" name="senha" maxlength="150"/> <br>
+			<label class="formulario usuario" for="senhaRepetida">Repita a senha</label> <input type="password" id="senhaRepetida" name="senhaRepetida" maxlength="150"/> <br>
 			<input type="submit" name="cadastrar" value="Cadastrar"/> <input type="reset" value="Limpar"/> <br>
 			<input type="hidden" name="operacao" value="salvar"> <br>
 		
