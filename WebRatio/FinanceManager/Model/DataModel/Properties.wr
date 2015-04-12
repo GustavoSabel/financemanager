@@ -1,0 +1,129 @@
+<DataModel xmlns:db="http://www.webratio.com/2006/WebML/Database" xmlns:gr="http://www.webratio.com/2006/WebML/Graph">
+  <Entity id="User" name="User" duration="persistent" gr:x="980" gr:y="550" gr:hideAttributes="false" attributeOrder="userOID userName password email" db:database="db2" db:table="user">
+    <Attribute name="oid" id="userOID" type="integer" key="true" db:column="oid"/>
+    <Attribute name="userName" id="userName" type="string" db:column="username"/>
+    <Attribute name="password" id="password" type="password" db:column="password"/>
+    <Attribute name="email" id="email" type="string" db:column="email"/>
+  </Entity>
+  <Entity id="Group" name="Group" duration="persistent" gr:x="980" gr:y="570" gr:hideAttributes="false" attributeOrder="groupOID groupName" db:database="db2" db:table="group">
+    <Attribute name="oid" id="groupOID" type="integer" key="true" db:column="oid"/>
+    <Attribute name="groupName" id="groupName" type="string" db:column="groupname"/>
+  </Entity>
+  <Entity id="Module" name="Module" duration="persistent" gr:x="970" gr:y="560" gr:hideAttributes="false" attributeOrder="moduleOID moduleID moduleName" db:database="db2" db:table="module">
+    <Attribute name="oid" id="moduleOID" type="integer" key="true" db:column="oid"/>
+    <Attribute name="moduleID" id="moduleID" type="string" db:column="moduleid"/>
+    <Attribute name="moduleName" id="moduleName" type="string" db:column="modulename"/>
+  </Entity>
+  <Relationship id="User2Group_Group2User" name="User_Group" sourceEntity="User" targetEntity="Group" db:database="db2" db:table="user_group">
+    <RelationshipRole1 id="User2Group" name="groups" maxCard="N">
+      <db:JoinColumn attribute="userOID" name="user_oid"/>
+    </RelationshipRole1>
+    <RelationshipRole2 id="Group2User" name="users" maxCard="N">
+      <db:JoinColumn attribute="groupOID" name="group_oid"/>
+    </RelationshipRole2>
+  </Relationship>
+  <Relationship id="User2DefaultGroup_DefaultGroup2User" name="User_DefaultGroup" sourceEntity="User" targetEntity="Group" gr:bendpoints="113,42,-112,44" db:database="db2" db:table="user">
+    <RelationshipRole1 id="User2DefaultGroup" name="defaultGroup" maxCard="1">
+      <db:JoinColumn attribute="userOID" name="oid"/>
+    </RelationshipRole1>
+    <RelationshipRole2 id="DefaultGroup2User" name="defaultUsers" maxCard="N">
+      <db:JoinColumn attribute="groupOID" name="group_oid"/>
+    </RelationshipRole2>
+  </Relationship>
+  <Relationship id="Group2DefaultModule_DefaultModule2Group" name="Group_DefaultModule" sourceEntity="Group" targetEntity="Module" db:database="db2" db:table="group">
+    <RelationshipRole1 id="Group2DefaultModule" name="defaultModule" maxCard="1">
+      <db:JoinColumn attribute="groupOID" name="oid"/>
+    </RelationshipRole1>
+    <RelationshipRole2 id="DefaultModule2Group" name="defaultGroups" maxCard="N">
+      <db:JoinColumn attribute="moduleOID" name="module_oid"/>
+    </RelationshipRole2>
+  </Relationship>
+  <Relationship id="Group2Module_Module2Group" name="Group_Module" sourceEntity="Group" targetEntity="Module" gr:bendpoints="110,41,-115,41" db:database="db2" db:table="group_module">
+    <RelationshipRole1 id="Group2Module" name="modules" maxCard="N">
+      <db:JoinColumn attribute="groupOID" name="group_oid"/>
+    </RelationshipRole1>
+    <RelationshipRole2 id="Module2Group" name="groups" maxCard="N">
+      <db:JoinColumn attribute="moduleOID" name="module_oid"/>
+    </RelationshipRole2>
+  </Relationship>
+  <db:Database id="db2" name="FinangeManager" type="MySQL" url="jdbc:mysql://localhost:3306/financemanager" username="root"/>
+  <Entity id="ent1" name="Usuario" db:database="db2" duration="persistent" db:table="usuario" gr:x="690" gr:y="40">
+    <Attribute id="ent1#att1" name="idusuario" db:column="idusuario" type="integer" key="true" db:idGenerator="identity"/>
+    <Attribute id="ent1#att2" name="nome" db:column="nome" type="string" key="false"/>
+    <Attribute id="ent1#att3" name="login" db:column="login" type="string" key="false"/>
+    <Attribute id="ent1#att4" name="senha" db:column="senha" type="string" key="false"/>
+  </Entity>
+  <Entity gr:x="510" gr:y="60" id="ent3" name="Categoria" duration="persistent" attributeOrder="ent3#att6 ent3#att7" db:database="db2" db:table="categoria">
+    <Attribute id="ent3#att6" key="true" name="oid" type="integer" db:column="oid"/>
+    <Attribute id="ent3#att7" name="Descricao" type="string" contentType="text/plain" db:column="descricao"/>
+  </Entity>
+  <Entity gr:x="260" gr:y="50" id="ent4" name="Transacao" duration="persistent" attributeOrder="ent4#att8 ent4#att10 ent4#att11 ent4#att5 ent4#att9 ent4#att16 ent4#att17" db:database="db2" db:table="transacao">
+    <Attribute id="ent4#att8" key="true" name="oid" type="integer" db:column="oid"/>
+    <Attribute id="ent4#att11" name="dataPagamento" type="date" db:column="datapagamento"/>
+    <Attribute id="ent4#att10" name="valor" type="decimal" db:column="valor"/>
+    <Attribute id="ent4#att5" name="dataVencimento" type="date" db:column="datavencimento"/>
+    <Attribute id="ent4#att9" name="entrada" type="boolean" db:column="entrada"/>
+    <Attribute id="ent4#att16" name="emprestimo" type="boolean" db:column="emprestimo">
+      <Comment xml:space="preserve">Se for dinheiro pego emprestado ou se foi um dinheiro que foi emprestado para alguem</Comment>
+    </Attribute>
+    <Attribute id="ent4#att17" name="pago" type="boolean" db:column="pago"/>
+  </Entity>
+  <Entity gr:x="10" gr:y="70" id="ent2" name="TransacoesFixas" duration="persistent" attributeOrder="ent2#att12 ent2#att18" db:database="db2" db:table="transacoesfixas">
+    <Attribute id="ent2#att12" key="true" name="oid" type="integer" db:column="oid"/>
+    <Attribute id="ent2#att18" name="numeroTransacoes" type="integer" db:column="numerotransacoes"/>
+  </Entity>
+  <Relationship id="rel4" name="Transacao_GrupoTransacoes" sourceEntity="ent4" targetEntity="ent2" db:database="db2" db:table="transacoesfixas">
+    <RelationshipRole1 id="rel4#role7" name="TransacaoToGrupoTransacoes" maxCard="N" cascadeDelete="false">
+      <db:JoinColumn attribute="ent4#att8" name="transacao_oid"/>
+    </RelationshipRole1>
+    <RelationshipRole2 id="rel4#role8" name="GrupoTransacoesToTransacao" maxCard="1">
+      <db:JoinColumn attribute="ent2#att12" name="oid"/>
+    </RelationshipRole2>
+    <Comment xml:space="preserve">Opcional.
+Para quando &#233; definido que uma Receita ou Despesa ir&#225; ser a mesma por um per&#237;odo.
+Exemplo: 
+	Academia: Repetir Despesa por 1 ano.
+	Salario(Se for fixo): Repetir Receita por 6 meses.</Comment>
+  </Relationship>
+  <Entity gr:x="490" gr:y="220" id="ent5" name="Parcelas" duration="persistent" attributeOrder="ent5#att13 ent5#att14 ent5#att15" db:database="db2" db:table="parcelas">
+    <Attribute id="ent5#att13" key="true" name="oid" type="integer" db:column="oid"/>
+    <Attribute id="ent5#att14" name="valorTotal" type="decimal" db:column="valortotal"/>
+    <Attribute id="ent5#att15" name="numeroParcelas" type="integer" db:column="numeroparcelas"/>
+  </Entity>
+  <Relationship id="rel7" name="Parcelas_Transacao" sourceEntity="ent5" targetEntity="ent4" gr:bendpoints="-71,-88,166,45" db:database="db2" db:table="parcelas">
+    <RelationshipRole1 id="rel7#role13" name="ParcelasToTransacao" maxCard="1">
+      <db:JoinColumn attribute="ent5#att13" name="oid"/>
+    </RelationshipRole1>
+    <RelationshipRole2 id="rel7#role14" name="TransacaoToParcelas" maxCard="N">
+      <db:JoinColumn attribute="ent4#att8" name="transacao_oid"/>
+    </RelationshipRole2>
+    <Comment xml:space="preserve">Uma transa&#231;&#227;o sempre ir&#225; apontar para Parcelas mesmo que seja somente uma partela.</Comment>
+  </Relationship>
+  <Relationship id="rel8" name="Transacao_Parcelas" sourceEntity="ent4" targetEntity="ent5" gr:bendpoints="96,148,-141,15" db:database="db2" db:table="parcelas">
+    <RelationshipRole1 id="rel8#role15" name="PagamentoDevolucao" maxCard="1" cascadeDelete="false">
+      <db:JoinColumn attribute="ent4#att8" name="transacao_oid_2"/>
+    </RelationshipRole1>
+    <RelationshipRole2 id="rel8#role16" name="ParcelasToTransacao_2" maxCard="1">
+      <db:JoinColumn attribute="ent5#att13" name="oid"/>
+    </RelationshipRole2>
+    <Comment xml:space="preserve">Opcional. 
+Essa liga&#231;&#227;o aponta para as parcelas de devolu&#231;&#227;o ou pagamento do valor emprestado.
+S&#243; ser&#225; usada quando for um valor emprestado que deve ser devolvido ou pago.</Comment>
+  </Relationship>
+  <Relationship id="rel9" name="Categoria_Parcelas" sourceEntity="ent3" targetEntity="ent5" db:database="db2" db:table="categoria">
+    <RelationshipRole1 id="rel9#role17" name="CategoriaToParcelas" maxCard="1">
+      <db:JoinColumn attribute="ent3#att6" name="oid"/>
+    </RelationshipRole1>
+    <RelationshipRole2 id="rel9#role18" name="ParcelasToCategoria" maxCard="N">
+      <db:JoinColumn attribute="ent5#att13" name="parcelas_oid"/>
+    </RelationshipRole2>
+  </Relationship>
+  <Relationship id="rel10" name="CategoriaTransacao" db:database="db2" db:table="categoria" sourceEntity="ent3" targetEntity="ent4">
+    <RelationshipRole1 id="rel10#role19" name="CategoriaToTransacao" maxCard="1">
+      <db:JoinColumn attribute="ent3#att6" name="oid"/>
+    </RelationshipRole1>
+    <RelationshipRole2 id="rel10#role20" name="TransacaoToCategoria" maxCard="N">
+      <db:JoinColumn attribute="ent4#att8" name="transacao_oid"/>
+    </RelationshipRole2>
+  </Relationship>
+</DataModel>

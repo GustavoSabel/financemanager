@@ -1,0 +1,11 @@
+<Area xmlns:gr="http://www.webratio.com/2006/WebML/Graph" gr:x="850" gr:y="40" id="sv1#area4" name="Criar nova Conta" landmark="false" landmarks="sv1#area4#cru3 sv1#area4#lgu4">
+  <OperationUnits>
+    <CreateUnit gr:x="210" gr:y="78" id="sv1#area4#cru3" name="Novo usu&#225;rio" entity="ent1" landmark="true" skipBlankRecords="false">
+      <OKLink id="sv1#area4#cru3#oln5" name="Usu&#225;rio cadastrado com sucesso" to="sv1#area4#page13#alphu10" automaticCoupling="true"/>
+      <KOLink id="sv1#area4#cru3#kln4" name="Erro ao cadastrar usu&#225;rio" to="sv1#area4#page13#alphu11" automaticCoupling="true"/>
+    </CreateUnit>
+    <LoginUnit id="sv1#area4#lgu4" name="Login" gr:x="1" gr:y="0" landmark="true">
+      <OKLink id="sv1#area4#lgu4#oln2" name="OKLink2" to="sv1#area1#page4" automaticCoupling="true"/>
+    </LoginUnit>
+  </OperationUnits>
+</Area>

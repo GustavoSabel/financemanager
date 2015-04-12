@@ -1,0 +1,15 @@
+<Area xmlns:gr="http://www.webratio.com/2006/WebML/Graph" gr:x="30" gr:y="30" id="sv1#area3" name="Receitas e Despesas" landmark="true" landmarks="sv1#area3#page10">
+  <OperationUnits>
+    <DeleteUnit id="sv1#area3#dlu2" name="Deletar" gr:x="0" gr:y="147" entity="ent4" landmark="false">
+      <Selector id="sv1#area3#dlu2#su5" defaultPolicy="fill" booleanOperator="and">
+        <KeyCondition id="sv1#area3#dlu2#su5#kcond5" name="oid" predicate="in" implied="false"/>
+      </Selector>
+      <OKLink id="sv1#area3#dlu2#oln3" name="Deletado com sucesso" to="sv1#area3#page10" automaticCoupling="true"/>
+      <KOLink id="sv1#area3#dlu2#kln2" name="Erro ao deletar" to="sv1#area3#page9" automaticCoupling="true"/>
+    </DeleteUnit>
+    <CreateUnit id="sv1#area3#cru2" name="Cadastrar" gr:x="20" gr:y="17" entity="ent4" bulk="false" skipBlankRecords="true" notBlankAttributes="ent4#att11">
+      <OKLink id="sv1#area3#cru2#oln4" name="Cadastrado com sucesso" to="sv1#area3#page10" automaticCoupling="true" gr:bendpoints="97,-26,-89,54"/>
+      <KOLink id="sv1#area3#cru2#kln5" name="Erro ao Cadastrar" to="sv1#area3#page9" automaticCoupling="true"/>
+    </CreateUnit>
+  </OperationUnits>
+</Area>

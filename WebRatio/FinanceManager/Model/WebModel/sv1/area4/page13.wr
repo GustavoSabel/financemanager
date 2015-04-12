@@ -1,0 +1,31 @@
+<Page xmlns:gr="http://www.webratio.com/2006/WebML/Graph" xmlns:layout="http://www.webratio.com/2006/WebML/Layout" gr:x="0" gr:y="79" id="sv1#area4#page13" name="Mensagem">
+  <ContentUnits>
+    <AlphabetUnit gr:x="0" gr:y="0" id="sv1#area4#page13#alphu10" name="Mensagem de sucesso" useNumbers="false" entity="ent1"/>
+    <AlphabetUnit id="sv1#area4#page13#alphu11" name="Mensagem de Erro" gr:x="15" gr:y="106" useNumbers="false" linkOrder="sv1#area4#page13#alphu11#ln10">
+      <Link id="sv1#area4#page13#alphu11#ln10" name="Link10" to="sv1#area4#cru3" automaticCoupling="true" type="normal" validate="true" gr:bendpoints="92,-62,-73,82"/>
+    </AlphabetUnit>
+  </ContentUnits>
+  <layout:Grid>
+    <layout:Row>
+      <layout:Cell>
+        <layout:Unit unitId="sv1#area4#page13#alphu10"/>
+      </layout:Cell>
+      <layout:Cell>
+        <layout:Unit unitId="sv1#area4#page13#alphu11">
+          <layout:Link link="sv1#area4#page13#alphu11#ln10"/>
+        </layout:Unit>
+      </layout:Cell>
+      <layout:Cell/>
+    </layout:Row>
+    <layout:Row>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+    </layout:Row>
+    <layout:Row>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+    </layout:Row>
+  </layout:Grid>
+</Page>

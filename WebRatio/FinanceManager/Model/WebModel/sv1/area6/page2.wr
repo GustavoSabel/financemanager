@@ -1,0 +1,29 @@
+<Page xmlns:gr="http://www.webratio.com/2006/WebML/Graph" xmlns:layout="http://www.webratio.com/2006/WebML/Layout" id="sv1#area6#page2" name="Categorias" linkOrder="sv1#area6#page2#ln5 sv1#area6#page2#ln13 sv1#area6#page2#ln14" gr:x="125" gr:y="0">
+  <ContentUnits>
+    <IndexUnit id="sv1#area6#page2#inu2" name="Categorias" gr:x="-1" gr:y="-1" entity="ent3" displayAttributes="ent3#att7"/>
+  </ContentUnits>
+  <layout:Grid>
+    <layout:Row>
+      <layout:Cell>
+        <layout:Unit unitId="sv1#area6#page2#inu2">
+          <layout:Attribute attribute="ent3#att7"/>
+        </layout:Unit>
+      </layout:Cell>
+      <layout:Cell/>
+      <layout:Cell/>
+    </layout:Row>
+    <layout:Row>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+    </layout:Row>
+    <layout:Row>
+      <layout:Cell/>
+      <layout:Cell/>
+      <layout:Cell/>
+    </layout:Row>
+  </layout:Grid>
+  <Link id="sv1#area6#page2#ln5" name="Link3" to="sv1#area6#mfu2" type="normal" automaticCoupling="true" validate="true" ajaxEnabled="false" preserveForm="true"/>
+  <Link id="sv1#area6#page2#ln13" name="Link13" to="sv1#area6#cru1" automaticCoupling="true" type="normal" validate="true"/>
+  <Link id="sv1#area6#page2#ln14" name="Link14" to="sv1#area6#dlu1" automaticCoupling="true" type="normal" validate="true"/>
+</Page>

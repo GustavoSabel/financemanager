@@ -1,0 +1,15 @@
+<Area xmlns:gr="http://www.webratio.com/2006/WebML/Graph" gr:x="262" gr:y="420" id="sv1#area6" name="Categoria" landmark="true">
+  <OperationUnits>
+    <ModifyUnit id="sv1#area6#mfu2" name="Modificar" gr:x="0" gr:y="162" entity="ent3" bulk="false">
+      <Selector id="sv1#area6#mfu2#su3" defaultPolicy="fill" booleanOperator="and">
+        <KeyCondition id="sv1#area6#mfu2#su3#kcond3" name="KeyCondition2" predicate="in" implied="false"/>
+      </Selector>
+    </ModifyUnit>
+    <CreateUnit gr:x="0" gr:y="2" id="sv1#area6#cru1" name="Cadastrar" entity="ent3"/>
+    <DeleteUnit gr:x="150" gr:y="172" id="sv1#area6#dlu1" name="Remover" entity="ent3">
+      <Selector id="sv1#area6#dlu1#su7" defaultPolicy="fill" booleanOperator="and">
+        <KeyCondition id="sv1#area6#dlu1#su7#kcond9" name="KeyCondition9" predicate="in" implied="false"/>
+      </Selector>
+    </DeleteUnit>
+  </OperationUnits>
+</Area>
