@@ -1,6 +1,6 @@
 <Page xmlns:gr="http://www.webratio.com/2006/WebML/Graph" xmlns:layout="http://www.webratio.com/2006/WebML/Layout" id="sv1#area3#page10" name="Transa&#231;&#245;es" linkOrder="sv1#area3#page10#ln6 sv1#area3#page10#ln7 sv1#area3#page10#ln12" gr:x="213" gr:y="0" landmark="true">
   <ContentUnits>
-    <MultiDataUnit id="sv1#area3#page10#mdu3" name="Transa&#231;&#245;es" gr:x="0" gr:y="0" entity="ent4" displayAttributes="ent4#att10 ent4#att11 ent4#att5"/>
+    <MultiDataUnit id="sv1#area3#page10#mdu3" name="Transa&#231;&#245;es" gr:x="0" gr:y="0" entity="ent5"/>
   </ContentUnits>
   <layout:Grid>
     <layout:Row>
@@ -8,7 +8,6 @@
         <layout:Unit unitId="sv1#area3#page10#mdu3">
           <layout:Attribute attribute="ent4#att10"/>
           <layout:Attribute attribute="ent4#att11"/>
-          <layout:Attribute attribute="ent4#att5"/>
         </layout:Unit>
       </layout:Cell>
       <layout:Cell/>

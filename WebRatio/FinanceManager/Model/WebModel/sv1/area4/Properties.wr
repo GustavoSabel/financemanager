@@ -1,4 +1,4 @@
-<Area xmlns:gr="http://www.webratio.com/2006/WebML/Graph" gr:x="850" gr:y="40" id="sv1#area4" name="Criar nova Conta" landmark="false" landmarks="sv1#area4#cru3 sv1#area4#lgu4">
+<Area xmlns:gr="http://www.webratio.com/2006/WebML/Graph" gr:x="850" gr:y="40" id="sv1#area4" name="Login" landmark="false" landmarks="sv1#area4#cru3 sv1#area4#lgu4">
   <OperationUnits>
     <CreateUnit gr:x="210" gr:y="78" id="sv1#area4#cru3" name="Novo usu&#225;rio" entity="ent1" landmark="true" skipBlankRecords="false">
       <OKLink id="sv1#area4#cru3#oln5" name="Usu&#225;rio cadastrado com sucesso" to="sv1#area4#page13#alphu10" automaticCoupling="true"/>
