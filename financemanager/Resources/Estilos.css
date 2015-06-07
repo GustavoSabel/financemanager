@@ -11,24 +11,27 @@ html {
 }
 
 header { 
-	height: 100px; background-color: #F2F2F2; 
-}
-
-img.logo { 
-	float:left; 
-	width:100px; 
-	height:100px 
+	height: 100px; 
+	background-color: #F2F2F2;
+	text-align: center; 
 }
 
 div.cabecalho { 
-	width: 400px; 
+	width: 500px;
+	text-align: center;
 	margin: 0 auto; 
 }
 
+div.cabecalho img.logo { 
+	width:100px; 
+	float:left;
+	height:100px;
+}
+
 div.cabecalho h1 { 
-	text-align: center; 
-	padding-top: 30px; 
-	margin-top: 0px 
+	position:relative;
+	top: 25px;
+	display:inline;
 }
 
 nav { 
@@ -51,7 +54,7 @@ nav ul.navegacao li {
 nav ul.navegacao li a.link_img{
 	text-decoration: none;
 	padding:7px 5px 3px 5px;
-	position:relative;
+		
 	top:2px;
 }
 
@@ -94,11 +97,11 @@ section {
 }
 
 #Valores { 
-	float:left 
+	float:left;
+	margin-right	: 50px;
 }
 
-#Pendencias { 
-	margin-left: 50px; 
+#Pendencias {  
 	float:left 
 }
 
@@ -115,18 +118,34 @@ footer {
 	left:0;
 }
 
+@media only screen and (max-width: 820px) {
+	footer {  
+		visibility: hidden; 
+	}
+}
+
 label.formulario {
     float: left;
     text-align: right;
     padding-right: 10px;
-}
-
-label.usuario {
     width: 100px; 
 }
 
-label.categoria {
-    width: 100px; 
+#msg{
+	
+}
+
+.erro {
+	color:#FF0000; 
+}
+
+.sucesso {
+	color:#00FF00; 
 }
 
 
+#usuarioLogado {
+	position: absolute;
+	right:20px;
+	top:10px;
+}

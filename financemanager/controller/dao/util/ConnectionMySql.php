@@ -13,14 +13,9 @@
     }
     $db_selected = mysql_select_db($db_name,$link);
     if (!$db_selected) {
-      throw new Exception("Banco de dados inexistente".mysql_error());
+      throw new Exception("Banco de dados inexistente: ".mysql_error());
     }
     return $link;
-  }
-    
-  //Fechar a conexão com o banco de dados "financemanager"
-  function closeConnection() {
-    mysql_close;
   }
 	
   //Gera o tempo atual no fuso-horário de Brasília. No horário oficial, o formato é Hora-3. No horário de verão, Hora-2
@@ -34,14 +29,14 @@
     
   //Retorna uma query mysql de um script
   function geraQuery($sql) {
-    getConnection();
+    $con = getConnection();
     try {
       $result = mysql_query($sql);
       if (!$result) {
-	throw new Exception("Query inválida: ".mysql_error());
+        throw new Exception("Query inválida: ".mysql_error());
       }
     } finally {
-      closeConnection();
+      mysql_close($con);
       return $result;
     }
   }

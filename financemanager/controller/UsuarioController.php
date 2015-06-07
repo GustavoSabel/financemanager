@@ -1,7 +1,7 @@
 <?php
-  include("../controller/dao/impl/UsuarioDaoImpl.php");
-  include("../controller/funcoesController.php");
-  include("../model/Usuario.php");
+  require_once("../controller/dao/impl/UsuarioDaoImpl.php");
+  require_once("../controller/funcoesController.php");
+  require_once("../model/Usuario.php");
 
   function salvar() {
     if (trim($_POST["nome"]) == "") {

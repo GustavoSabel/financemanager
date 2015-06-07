@@ -1,9 +1,20 @@
 <!DOCTYPE html>
+
+<?php
+	session_start();
+	require_once("../controller/funcoesController.php");
+	if(existeUsuarioLogado()) {
+		gotoHome();
+	}
+?>
+
 <html>
   <head>
 	<meta charset="utf-8">
     <title>Cadastro de usuário</title>
 	<link rel="stylesheet" href="../Resources/Estilos.css">
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<script src="../Resources/Login.js"></script>
   </head>
   <body>
 	<header>
@@ -14,32 +25,31 @@
 	<nav>
 		<ul class="navegacao">
 			<li>
-				<a class="link_img" href="../index.php">
-					<img src="../Resources/Imagens/home-icon_white_64.png" alt="Home" style="width:16px; height:16px; border:0; padding-top:0px;" />
-				</a>
-			</li>
-			<li>
-				<a class="link_texto" href="cadastrocategoria.php">Cadastro de categoria</a>
+				<a class="link_texto" href="login.php">Login</a>
 			</li>
 		</ul>
 	</nav>
 	<section>
 		<form method=post action="../controller/UsuarioController.php">
-
-			<label class="formulario usuario" for="nome">Nome</label> <input type="text" id="nome" name="nome" maxlength="150"/> <br>
-			<label class="formulario usuario" for="login">Login</label> <input type="text" id="login" name="login" maxlength="50"/> <br>
-			<label class="formulario usuario" for="senha">Senha</label> <input type="password" id="senha" name="senha" maxlength="150"/> <br>
-			<label class="formulario usuario" for="senhaRepetida">Repita a senha</label> <input type="password" id="senhaRepetida" name="senhaRepetida" maxlength="150"/> <br>
-			<input type="submit" name="cadastrar" value="Cadastrar"/> <input type="reset" value="Limpar"/> <br>
+			<label class="formulario usuario" for="nome">Nome</label> 
+			<input type="text" id="nome" name="nome" maxlength="150"/> <br>
+			<label class="formulario usuario" for="login">Login</label> 
+			<input type="text" id="login" name="login" maxlength="50"/> <br>
+			<label class="formulario usuario" for="senha">Senha</label> 
+			<input type="password" id="senha" name="senha" maxlength="150"/> <br>
+			<label class="formulario usuario" for="senhaRepetida">Repita a senha</label> 
+			<input type="password" id="senhaRepetida" name="senhaRepetida" maxlength="150"/> <br>
+			<input type="submit" name="cadastrar" value="Cadastrar"/> 
+			<input type="reset" value="Limpar"/> <br>
 			<input type="hidden" name="operacao" value="salvar"> <br>
-		
 			<?php
 				if (isset($_GET["msg"])){
 					$msg=$_GET["msg"];
-					echo "<br>".$msg."<br>";
+					echo "<div id='msg'".$msg."</div>";
 				}
 			?>
 		</form>
+		<div id="msg"></div>
 	</section>
 	<footer>
 		<span> All Rights Reserved. </span>
