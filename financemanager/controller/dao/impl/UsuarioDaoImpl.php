@@ -1,7 +1,7 @@
 <?php
-include("../controller/dao/DAO.php");
-include("../controller/dao/util/ConnectionMySql.php");
-//include("model/Usuario.php");
+require_once("../controller/dao/DAO.php");
+require_once("../controller/dao/util/ConnectionMySql.php");
+require_once("../../../model/Usuario.php");
 
   class UsuarioDaoImpl implements DAO {
 
@@ -11,7 +11,7 @@ include("../controller/dao/util/ConnectionMySql.php");
     }
     
     public function excluir($identificador) {
-      throw new Exception("Função excluir não implementada.");
+      geraQuery("DELETE FROM ".Usuario::$TABELA." WHERE ".Usuario::$CAMPO_IDUSUARIO." = ".$identificador);
     }
     
     public function buscar($identificador) {
@@ -28,6 +28,12 @@ include("../controller/dao/util/ConnectionMySql.php");
     
     public function listar($infoInicial, $infoFinal) {
       throw new Exception("Função listar não implementada.");
+    }
+    
+    public function listarTodos() {
+      $result = geraQuery("select ".Usuario::$CAMPO_IDUSUARIO.", ".Usuario::$CAMPO_NOME.", ".Usuario::$CAMPO_LOGIN.", ".Usuario::$CAMPO_SENHA.
+                            " from ".Usuario::$TABELA);
+      return $result;
     }
     
     public function editar($info) {

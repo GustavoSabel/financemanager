@@ -1,58 +1,35 @@
 <?php
-  class Usuario {
-    private $idUsuario;
-    private $nome;
-    private $login;
-    private $senha;
+  class Categoria {
+    private $id;
+    private $descricao;
     
-    public static $TABELA = "usuario";
-    public static $CAMPO_IDUSUARIO = "idusuario";
-    public static $CAMPO_NOME = "nome";
-    public static $CAMPO_LOGIN = "login";
-    public static $CAMPO_SENHA = "senha";
+    public static $TABELA = "categoria";
+    public static $CAMPO_ID = "idcategoria";
+    public static $CAMPO_DESCRICAO = "descricao";
     
-    function __construct($idUsuario, $nome, $login, $senha) {
-      $this->idUsuario = $idUsuario;
-      $this->nome = $nome;
-      $this->login = $login;
-      $this->senha = $senha;
+    function __construct($id, $descricao) {
+      $this->id = $id;
+      $this->descricao = $descricao;
     }
     
-    public function getIdUsuario() {
-      return $this->idUsuario;
+    public function getId() {
+      return $this->id;
     }
     
-    public function getNome() {
-      return $this->nome;
+    public function getDescricao() {
+      return $this->descricao;
     }
     
-    public function getLogin() {
-      return $this->login;
+    public function setId($id) {
+      $this->id = $id;
     }
     
-    public function getSenha() {
-      return $this->senha;
-    }
-    
-    public function setIdUsuario($idUsuario) {
-      $this->idUsuario = $idUsuario;
-    }
-    
-    public function setNome($nome) {
-      $this->nome = $nome;
-    }
-    
-    public function setLogin($login) {
-      $this->login = $login;
-    }
-    
-    public function setSenha($senha) {
-      $this->senha = $senha;
+    public function setDescricao($descricao) {
+      $this->descricao = $descricao;
     }
     
     public function __tostring() {
-      return "Nome: ".$this->getNome()."<br>".
-             "Login: ".$this->getLogin();
+      return "Categoria: ".$this->getDescricao();
     }
   }
 ?>

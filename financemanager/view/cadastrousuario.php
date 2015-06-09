@@ -17,7 +17,7 @@
 	<script src="../Resources/Login.js"></script>
   </head>
   <body>
-	<header>
+	<header>	
 		<div class="cabecalho">
 			<h1>Cadastro de usuário</h1><br>
 		</div>
