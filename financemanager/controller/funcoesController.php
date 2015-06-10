@@ -1,6 +1,6 @@
 <?php	
   define("SESSION_USER", "username####");
-  define("PATH_FINANCEMANAGER", "http://localhost/FURB/Trabalho/trunk/financemanager");
+  define("PATH_FINANCEMANAGER", "http://localhost/financemanager");
 
   //Redireciona para outra página enviando uma mensagem
   function redireMsg($local, $mensagem) {
@@ -8,7 +8,7 @@
   }
 
   //Verifica se existe alguma sessão de algum usuario
-  function existeUsuarioLogado() {
+  /*function existeUsuarioLogado() {
     if (!isset($_SESSION[SESSION_USER])) {
       $_SESSION[SESSION_USER] == "";
     }
@@ -16,6 +16,10 @@
       return true;
     }
     return false;      
+  }*/
+
+  function existeUsuarioLogado() {
+    return (isset($_SESSION[SESSION_USER]) && ($_SESSION[SESSION_USER] != ""));
   }
   
   //Caso não tenha nenhum usuário logado, redireciona para a tela de login

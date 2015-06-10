@@ -1,7 +1,7 @@
 <?php
 require_once("../controller/dao/DAO.php");
 require_once("../controller/dao/util/ConnectionMySql.php");
-require_once("../../../model/Usuario.php");
+require_once("../model/Usuario.php");
 
   class UsuarioDaoImpl implements DAO {
 

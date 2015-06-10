@@ -1,7 +1,7 @@
 <?php
 require_once("../controller/dao/DAO.php");
 require_once("../controller/dao/util/ConnectionMySql.php");
-require_once("../../../model/Categoria.php");
+require_once("../model/Categoria.php");
 
   class CategoriaDaoImpl implements DAO {
 
