@@ -2,48 +2,58 @@
   require_once("../controller/dao/impl/UsuarioDaoImpl.php");
   require_once("../controller/funcoesController.php");
   require_once("../model/Usuario.php");
+  header('Content-type: application/json');
+  header('Access-Control-Allow-Origin: *');
+  header('Access-Control-Allow-Headers: X-Requested-With');
 
-  function salvar() {
-    if (trim($_POST["nome"]) == "") {
-      throw new Exception("Nome de usuário não informado."); 
-    }
-    if (trim($_POST["login"]) == "") {
-      throw new Exception("Login de usuário não informado."); 
-    }
-    if (trim($_POST["senha"]) == "") {
-      throw new Exception("Senha de usuário não informada.");
-    }
-    if (trim($_POST["senhaRepetida"]) == "") {
-      throw new Exception("Repita a senha para cadastrar.");
-    }
-    if ($_POST["senha"] != $_POST["senhaRepetida"]) {
-      throw new Exception("Senhas não conferem.");
-    }
-    
-    $usuario = new Usuario(0, $_POST["nome"], $_POST["login"], $_POST["senha"]);
+  $msgRetorno = array("erro" => 99, "msg" => "Erro indefinido");
 
-    $usuarioDao = new UsuarioDaoImpl();
-    
-    if ($usuarioDao->buscar($usuario->getLogin()) != null) {
-      throw new Exception('Usuário com login "'.$usuario->getLogin().'" já existe.');
-    }
-    $usuarioDao->salvar($usuario);
-    
-    redireMsg("../view/cadastrousuario.php", "Usuário cadastrado com sucesso.");
-  }  
-  
-  try {
-    if ($_POST["operacao"] == "salvar") {
-      salvar();
-    } /*else if ($_POST["operacao"] == "editar") {
-      editar;
-    } else if ($_POST["operacao"] == "excluir") {
-      excluir;
-    } else if ($_POST["operacao"] == "buscar") {
-      buscar;
-    } */
-  } catch (Exception $e) {
-    redireMsg("../view/cadastrousuario.php", "Erro: ".$e->getMessage());
+  switch($_SERVER['REQUEST_METHOD'])
+  {
+      case 'POST':
+        $msgRetorno = salvar($msgRetorno);
+        break;
+      //Não consegui pegar as varáveis via $_REQUEST com o PUT
+      /*case 'PUT':
+        $msgRetorno["erro"] = salvar();
+        break;*/
+      case 'DELETE':
+        $msgRetorno["erro"] = 999;
+        $msgRetorno["msg"] = "DELETE Ainda não implementado";
+        break;
+      case 'GET':
+        $msgRetorno["erro"] = 999;
+        $msgRetorno["msg"] = "GET Ainda não implementado";
+        break;
   }
+
+  $jsonFormat = json_encode($msgRetorno);
+  print($jsonFormat);
+
+  function salvar($msgRetorno) {
+    $msgRetorno = array("erro" => 99, "msg" => "SSSSSSSSSSSS");
+    if (trim($_REQUEST["nome"]) == "") {
+      $msgRetorno["msg"] = "Nome de usuário não informado.";
+      $msgRetorno["erro"] = 1; 
+    } else if (trim($_REQUEST["login"]) == "") {
+      $msgRetorno["msg"] = "Login de usuário não informado."; 
+      $msgRetorno["erro"] = 2;
+    } else if (trim($_REQUEST["senha"]) == "") {
+      $msgRetorno["msg"] = "Senha de usuário não informada.";
+      $msgRetorno["erro"] = 3;
+    } else {   
+      $usuario = new Usuario(0, $_REQUEST["nome"], $_REQUEST["login"], $_REQUEST["senha"]);
+      $usuarioDao = new UsuarioDaoImpl();
+      if ($usuarioDao->buscar($usuario->getLogin()) != null) {
+        $msgRetorno["msg"] = 'Usuário com login "'.$usuario->getLogin().'" já existe.';
+        $msgRetorno["erro"] = 4;
+      } else {
+        $usuarioDao->salvar($usuario);
+        $msgRetorno["msg"] = "Salvo com sucesso";
+        $msgRetorno["erro"] = 0;
+      }
+    }
+    return $msgRetorno; 
+  }  
 ?>
 

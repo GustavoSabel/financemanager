@@ -2,10 +2,9 @@ $(document).ready(function(){
   $("#submitLogin").click(function(e){
     e.preventDefault();
 
-    var valores = "";
     var usuario = $("#username").val();
     var senha = $("#password").val();
-    valores = { "username": usuario, "password": senha, "operacao": "logar" };
+    var valores = { "username": usuario, "password": senha, "operacao": "logar" };
   //  console.log(valores); 
 
    // valores = $("#form1").serialize();

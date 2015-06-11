@@ -31,9 +31,9 @@
       </ul>
     </nav>
     <section>
-      <form id="form1" method="post" action="">
+      <form id="form" name="form" method="post" action="">
           <label class="formulario login" for="username">Usuário: </label> 
-          <input type="text" id="username" name="username" id="username" /> <br/>
+          <input type="text" id="username" name="username" id="username" pattern="[a-z\s]+$" required="required"/> <br/>
           <label class="formulario login" for="password">Senha: </label> 
           <input type="password" id="password" name="password" id="password" /> <br/>
           <input type="submit" id="submitLogin" name="submitLogin" value="validar" />
