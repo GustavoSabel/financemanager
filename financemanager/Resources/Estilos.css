@@ -54,13 +54,13 @@ nav ul.navegacao li {
 nav ul.navegacao li a.link_img{
 	text-decoration: none;
 	padding:7px 5px 3px 5px;
-		
+	position: relative;
 	top:2px;
 }
 
 nav ul.navegacao li a.link_texto{
 	text-decoration: none;
-	padding:5px 5px 5px 5px;
+	padding:5px 15px 5px 15px;
 }
 
 /* unvisited link */
@@ -124,12 +124,27 @@ footer {
 	}
 }
 
+div.formulario {
+	margin-left: 100px;
+}
+
 label.formulario {
     float: left;
     text-align: right;
     padding-right: 10px;
     width: 100px; 
 }
+
+div.transacao {
+	margin-left: 155px;
+	margin-bottom: 5px; 
+}
+
+
+label.transacao {
+    width: 150px; 
+}
+
 
 #msg{
 	

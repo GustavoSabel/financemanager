@@ -16,20 +16,14 @@
     <script src="../Resources/Login.js"></script>
   </head>
   <body>
-	<header>
+	 <header>
 		<div id="usuarioLogado"> <span><?php echo($usuario) ?></span> <a href="#" id="logoff">Sair</a> </div>
 		<div class="cabecalho">
 			<img class="logo" src="http://www.fronteirasemfim.com.br/wp-content/uploads/2011/08/financisto.png" />
 			<h1>Finance Manager</h1>
 		<div>
 	</header>
-	<nav>
-		<ul class="navegacao">
-			<li>
-				<a class="link_texto" href="cadastrocategoria.php">Cadastro de categoria</a>
-			</li>
-		</ul>
-	</nav>
+  	<?php include("componenteNavegacao.html") ?>
 	<section>
 		<div id="Valores">
 			<h2>Resumo do Mês</h2>

@@ -16,11 +16,11 @@
       //Não consegui pegar as varáveis via $_REQUEST com o PUT
       /*case 'PUT':
         $msgRetorno["erro"] = salvar();
-        break;*/
+        break;
       case 'DELETE':
         $msgRetorno["erro"] = 999;
         $msgRetorno["msg"] = "DELETE Ainda não implementado";
-        break;
+        break;*/
       case 'GET':
         $msgRetorno["erro"] = 999;
         $msgRetorno["msg"] = "GET Ainda não implementado";

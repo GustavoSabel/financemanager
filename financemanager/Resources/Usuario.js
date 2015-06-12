@@ -16,7 +16,7 @@ $(document).ready(function(){
     
     $("#msg").removeClass();
     $("#msg").html("Cadastrando, aguarde...");
-    $.ajax({type: "post", url: "../controller/UsuarioController.php",
+    $.ajax({type: "post", url: "../controller/UsuarioController.php?operacao=salvar",
       dataType: "json",
       data: valores, 
       success: function(result){

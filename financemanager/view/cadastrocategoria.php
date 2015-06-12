@@ -22,15 +22,7 @@
 			<h1>Cadastro de categoria</h1>
 		</div>
 	</header>
-	<nav>
-		<ul class="navegacao">
-			<li>
-				<a class="link_img" href="../index.php">
-					<img src="../Resources/Imagens/home-icon_white_64.png" alt="Home" style="width:16px; height:16px; border:0; padding-top:0px;" />
-				</a>
-			</li>
-		</ul>
-	</nav>
+	<?php include("componenteNavegacao.html") ?>
 	<section>
 		<form method="post" action="../controller/categoriaController.php">
 			<label class="formulario categoria" for="categoria">Categoria</label> 
