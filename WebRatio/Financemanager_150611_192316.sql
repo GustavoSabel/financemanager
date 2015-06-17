@@ -1,109 +1,82 @@
--- Group [Group]
-create table `group` (
-   `group`  integer  not null,
-   `groupname`  varchar(255),
-  primary key (`oid`)
-);
-
-
--- Module [Module]
-create table `module` (
-   `oid`  integer  not null,
-   `moduleid`  varchar(255),
-   `modulename`  varchar(255),
-  primary key (`oid`)
-);
-
-
--- User [User]
-create table `user` (
-   `oid`  integer  not null,
-   `email`  varchar(255),
-   `password`  varchar(255),
-   `username`  varchar(255),
-  primary key (`oid`)
-);
-
-
--- Usuario [ent1]
-create table `usuario` (
-   `idusuario`  not null auto_increment,
-   `nome`  varchar(255),
-   `login`  varchar(255),
-   `senha`  varchar(255),
+-- Usuario
+CREATE TABLE IF NOT EXISTS `usuario` (
+   `idusuario` int(11) not null,
+   `nome`  varchar(255) not null,
+   `login`  varchar(255) not null,
+   `senha`  varchar(255) not null,
   primary key (`idusuario`)
-);
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COMMENT='Usuários do sistema';
+
+ALTER TABLE `usuario`
+MODIFY `idusuario` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=0;
 
 
--- Categoria [ent3]
-create table `categoria` (
-   `oid`  integer  not null,
-   `descricao`  varchar(255),
-  primary key (`oid`)
-);
+-- Categoria
+CREATE TABLE IF NOT EXISTS `categoria` (
+   `idcategoria`  int(11)  not null,
+   `descricao`  varchar(255) not null,
+  primary key (`idcategoria`)
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COMMENT='Categorias de transações';
+
+ALTER TABLE `categoria`
+MODIFY `idcategoria` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=0;
 
 
--- Parcela [ent4]
-create table `transacao` (
-   `oid`  integer  not null,
+-- Transação
+CREATE TABLE IF NOT EXISTS `transacao` (
+   `idtransacao`  int(11)  not null,
+   `descricao` varchar(255),   
+   `valortotal`  decimal(19,2),
+   `numeroparcelas`  int(11),
+   `tipo` integer,
+  primary key (`idtransacao`)
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COMMENT='Transações financeiras';
+
+ALTER TABLE `transacao`
+MODIFY `idtransacao` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=0;
+
+
+-- Parcela
+CREATE TABLE IF NOT EXISTS `parcela` (
+   `idparcela`  integer  not null,
    `valor`  decimal(19,2),
    `datapagamento`  date,
-   `pago`  bit,
-     date,
-  primary key (`oid`)
-);
+   `datavencimento`  date,
+   `pago`  boolean,
+  primary key (`idparcela`)
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COMMENT='Parcelas das Transações';
+
+ALTER TABLE `parcela`
+MODIFY `idparcela` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=0;
 
 
--- Transação [ent5]
-create table `parcelas` (
-   `oid`  integer  not null,
-   `valortotal`  decimal(19,2),
-   `numeroparcelas`  integer,
-     integer,
-     varchar(255),
-  primary key (`oid`)
-);
+-- Pessoa
+CREATE TABLE IF NOT EXISTS `pessoa` (
+   `idpessoa`  integer  not null,
+   `nome`  varchar(100) not null,
+   `endereco`  varchar(100) not null,
+   `email`  varchar(100) not null,
+   `telefone`  varchar(100) not null,
+  primary key (`idpessoa`)   
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COMMENT='Pessoas com quem o usuário faz Transações';
+
+ALTER TABLE `pessoa`
+MODIFY `idpessoa` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=0;
 
 
--- Group_DefaultModule [Group2DefaultModule_DefaultModule2Group]
-alter table `group`  add column  `module_oid`  integer;
-alter table `group`   add index fk_group_module (`module_oid`), add constraint fk_group_module foreign key (`module_oid`) references `module` (`oid`);
-create index `idx_group_module` on `group`(`module_oid`);
 
+-- Transacao_Usuario
+alter table `transacao` add column `idusuario` integer;
+alter table `transacao` add index fk_transacao_usuario (`idusuario`), add constraint fk_transacao_usuario foreign key (`idusuario`) references `usuario` (`idusuario`);
 
--- Group_Module [Group2Module_Module2Group]
-create table `group_module` (
-   `group_oid`  integer not null,
-   `module_oid`  integer not null,
-  primary key (`group_oid`, `module_oid`)
-);
-alter table `group_module`   add index fk_group_module_group (`group_oid`), add constraint fk_group_module_group foreign key (`group_oid`) references `group` (`oid`);
-alter table `group_module`   add index fk_group_module_module (`module_oid`), add constraint fk_group_module_module foreign key (`module_oid`) references `module` (`oid`);
-create index `idx_group_module_group` on `group_module`(`group_oid`);
-create index `idx_group_module_module` on `group_module`(`module_oid`);
+-- Transacao_Pessoa
+alter table `transacao` add column `idpessoa` integer;
+alter table `transacao` add index fk_transacao_pessoa (`idpessoa`), add constraint fk_transacao_pessoa foreign key (`idpessoa`) references `pessoa` (`idpessoa`);
 
+-- Transacao_Categoria
+alter table `transacao` add column `idcategoria` integer;
+alter table `transacao` add index fk_transacao_categoria (`idcategoria`), add constraint fk_transacao_categoria foreign key (`idcategoria`) references `categoria` (`idcategoria`);
 
--- User_DefaultGroup [User2DefaultGroup_DefaultGroup2User]
-alter table `user`  add column  `group_oid`  integer;
-alter table `user`   add index fk_user_group (`group_oid`), add constraint fk_user_group foreign key (`group_oid`) references `group` (`oid`);
-create index `idx_user_group` on `user`(`group_oid`);
-
-
--- User_Group [User2Group_Group2User]
-create table `user_group` (
-   `user_oid`  integer not null,
-   `group_oid`  integer not null,
-  primary key (`user_oid`, `group_oid`)
-);
-alter table `user_group`   add index fk_user_group_user (`user_oid`), add constraint fk_user_group_user foreign key (`user_oid`) references `user` (`oid`);
-alter table `user_group`   add index fk_user_group_group (`group_oid`), add constraint fk_user_group_group foreign key (`group_oid`) references `group` (`oid`);
-create index `idx_user_group_user` on `user_group`(`user_oid`);
-create index `idx_user_group_group` on `user_group`(`group_oid`);
-
-
--- Categoria_Parcelas [rel9]
-alter table `categoria`  add column  `parcelas_oid`  integer;
-alter table `categoria`   add index fk_categoria_parcelas (`parcelas_oid`), add constraint fk_categoria_parcelas foreign key (`parcelas_oid`) references `parcelas` (`oid`);
-create index `idx_categoria_parcelas` on `categoria`(`parcelas_oid`);
-
-
+-- Parcela_Transacao
+alter table `parcela` add column `idtransacao` integer;
+alter table `parcela` add index fk_parcela_transacao (`idtransacao`), add constraint fk_parcela_transacao foreign key (`idtransacao`) references `transacao` (`idtransacao`);
