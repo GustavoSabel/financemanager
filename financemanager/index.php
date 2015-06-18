@@ -1,4 +1,4 @@
 <?php
-	require_once("controller/funcoesController.php");
-	gotoHome();
+require_once ("controller/funcoesController.php");
+gotoHome ();
 ?>
