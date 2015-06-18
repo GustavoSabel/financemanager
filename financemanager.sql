@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS categoria (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS parcela (
-  idParecela int(11) NOT NULL,
+  idParecela int(11) NOT NULL AUTO_INCREMENT,
   valortotal decimal(19,2) DEFAULT NULL,
   numeroparcelas int(11) DEFAULT NULL,
   idTransacao int(11) DEFAULT NULL,
@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS parcela (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS transacao (
-  idTransacao int(11) NOT NULL,
+  idTransacao int(11) NOT NULL AUTO_INCREMENT,
   datapagamento date DEFAULT NULL,
   valor decimal(19,2) DEFAULT NULL,
   datavencimento date DEFAULT NULL,
@@ -32,14 +32,14 @@ CREATE TABLE IF NOT EXISTS transacao (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS transacoesfixas (
-  idTransacaofixa int(11) NOT NULL,
+  idTransacaofixa int(11) NOT NULL AUTO_INCREMENT,
   numerotransacoes int(11) DEFAULT NULL,
   idTransacao int(11) DEFAULT NULL,
   PRIMARY KEY (idTransacaofixa)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS usuario (
-  idUsuario int(11) NOT NULL,
+  idUsuario int(11) NOT NULL AUTO_INCREMENT,
   nome varchar(100) NOT NULL,
   login varchar(50) NOT NULL,
   senha varchar(255) NOT NULL,
