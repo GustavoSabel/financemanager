@@ -52,8 +52,8 @@
       return $this->idPessoa;
     }
 
-    public function getIdPessoa() {
-      return $this->idPessoa;
+    public function getIdCategoria() {
+      return $this->idCategoria;
     }
 
     public function setIdTransacao($idTransacao) {
