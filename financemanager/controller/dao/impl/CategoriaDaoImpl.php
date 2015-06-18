@@ -4,7 +4,7 @@ require_once ("../controller/dao/util/ConnectionMySql.php");
 require_once ("../model/Categoria.php");
 class CategoriaDaoImpl implements DAO {
 	public function salvar($info) {
-		geraQuery ( "insert into " . Categoria::$TABELA . "(" . Categoria::$CAMPO_ID . ", " . Categoria::$CAMPO_DESCRICAO . ")" . " values (" . $info->getId () . ", '" . $info->getDescricao () . "')" );
+		return geraQuery ( "insert into " . Categoria::$TABELA . "(" . Categoria::$CAMPO_ID . ", " . Categoria::$CAMPO_DESCRICAO . ")" . " values (" . $info->getId () . ", '" . $info->getDescricao () . "')" );
 	}
 	public function excluir($codigo) {
 		throw new Exception ( "Função excluir não implementada." );
@@ -13,7 +13,7 @@ class CategoriaDaoImpl implements DAO {
 		$result = geraQuery ( "select " . Categoria::$CAMPO_ID . ", " . Categoria::$CAMPO_DESCRICAO . " from " . Categoria::$TABELA . " where " . Categoria::$CAMPO_DESCRICAO . " like '%" . $descricao . "%'" );
 		if (geraNumeroLinhas ( $result ) > 0) {
 			if ($usuarios = geraArrayQuery ( $result )) {
-				return new Categoria ( $usuarios [0], $usuarios [1], $usuarios [2], $usuarios [3] );
+				return new Categoria ( $usuarios [0], $usuarios [1] );
 			}
 		}
 		return null;

@@ -1,13 +1,6 @@
 <!DOCTYPE html>
-
-<?php
-session_start ();
-require_once ("../controller/funcoesController.php");
-require_once ("../controller/CategoriaController.php");
-validaSessao ();
-$categoria = usuarioLogado ();
-?>
-
+<?php include("componenteUsuarioLogado.php")?>
+<?php require_once("../controller/dao/impl/CategoriaDaoImpl.php");?>
 <html>
 <head>
 <meta charset="utf-8">
@@ -15,15 +8,9 @@ $categoria = usuarioLogado ();
 <link rel="stylesheet" href="../Resources/Estilos.css">
 <script
 	src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="../Resources/TratadorErro.js"></script>
 <script src="../Resources/Login.js"></script>
 <script src="../Resources/transacao.js"></script>
-<script>
-	$(document).ready(function(){
-		$.post("../CategoriaController.php", { "operacao" : "getAll" }, function(ret) {
-			alert(ret);
-		});
-	});
-</script>
 </head>
 <body>
 	<header>
@@ -44,7 +31,6 @@ $categoria = usuarioLogado ();
 			<label class="formulario transacao" for="categoria">Categoria</label>
 
 			<select id="categoria">
-			
 			<?php
 			$categoriaDao = new CategoriaDaoImpl ();
 			$resultado = $categoriaDao->listarTodos ();
@@ -54,14 +40,13 @@ $categoria = usuarioLogado ();
 				echo "<option value='" . $cat . "'>" . $cat . "</option>";
 			}
 			?>
-			</select> <br>
-			
-			<label class="formulario transacao" for="valorTotal">Valor Total</label>
-			<input type="text" id="valorTotal" name="valorTotal" maxlength="10" />
-			<br> <label class="formulario transacao" for="valorTotal">Numero de
-				Parcelas</label> <input type="number" min="1" max="99" id="login"
-				name="login" /> <br> <label class="formulario transacao" for="senha">Descrição</label>
-			<input type="text" id="senha" name="senha" maxlength="150" /> <br> <input
+			</select> <br> <label class="formulario transacao" for="valorTotal">Valor
+				Total</label> <input type="text" id="valorTotal" name="valorTotal"
+				maxlength="10" /> <br> <label class="formulario transacao"
+				for="valorTotal">Numero de Parcelas</label> <input type="number"
+				min="1" max="99" id="login" name="login" /> <br> <label
+				class="formulario transacao" for="senha">Descrição</label> <input
+				type="text" id="senha" name="senha" maxlength="150" /> <br> <input
 				type="submit" name="submit" id="submit" value="Cadastrar" /> <input
 				type="reset" value="Limpar" /> <br>
 		</form>

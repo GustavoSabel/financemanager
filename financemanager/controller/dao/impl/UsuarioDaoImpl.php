@@ -4,7 +4,7 @@ require_once ("../controller/dao/util/ConnectionMySql.php");
 require_once ("../model/Usuario.php");
 class UsuarioDaoImpl implements DAO {
 	public function salvar($info) {
-		geraQuery ( "insert into " . Usuario::$TABELA . "(" . Usuario::$CAMPO_IDUSUARIO . ", " . Usuario::$CAMPO_NOME . ", " . Usuario::$CAMPO_LOGIN . ", " . Usuario::$CAMPO_SENHA . ")" . " values (" . $info->getIdUsuario () . ", '" . $info->getNome () . "', '" . $info->getLogin () . "', '" . $info->getSenha () . "')" );
+		return geraQuery ( "insert into " . Usuario::$TABELA . "(" . Usuario::$CAMPO_NOME . ", " . Usuario::$CAMPO_LOGIN . ", " . Usuario::$CAMPO_SENHA . ")" . " values ('" . $info->getNome () . "', '" . $info->getLogin () . "', '" . $info->getSenha () . "')" );
 	}
 	public function excluir($identificador) {
 		geraQuery ( "DELETE FROM " . Usuario::$TABELA . " WHERE " . Usuario::$CAMPO_IDUSUARIO . " = " . $identificador );

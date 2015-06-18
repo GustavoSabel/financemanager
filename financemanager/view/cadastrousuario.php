@@ -15,6 +15,7 @@ if (existeUsuarioLogado ()) {
 <link rel="stylesheet" href="../Resources/Estilos.css">
 <script
 	src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="../Resources/TratadorErro.js"></script>
 <script src="../Resources/Login.js"></script>
 <script src="../Resources/Usuario.js"></script>
 </head>

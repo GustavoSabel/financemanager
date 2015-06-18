@@ -12,22 +12,35 @@ $msgRetorno = array (
 );
 
 switch ($_SERVER ['REQUEST_METHOD']) {
-	case 'PUT' :
-		$msgRetorno ["erro"] = salvar ();
+	case 'POST' :
+		switch ($_POST ["operacao"]) {
+			case 'salvar' :
+				$msgRetorno = salvar ();
+				break;
+		}
 		break;
-	case 'DELETE' :
-		$msgRetorno ["erro"] = 999;
-		$msgRetorno ["msg"] = "DELETE Ainda não implementado";
-		break;
-	case 'GET' :
-		$msgRetorno ["erro"] = 999;
-		$msgRetorno ["msg"] = "GET Ainda não implementado";
-		break;
+	// case 'PUT' :
+	// $msgRetorno ["erro"] = salvar ();
+	// break;
+	// case 'DELETE' :
+	// $msgRetorno ["erro"] = 999;
+	// $msgRetorno ["msg"] = "DELETE Ainda não implementado";
+	// break;
+	// case 'GET' :
+	// $msgRetorno ["erro"] = 999;
+	// $msgRetorno ["msg"] = "GET Ainda não implementado";
+	// break;
 }
 function salvar() {
+	$msgRetorno = array (
+			"erro" => 0,
+			"msg" => "Gravado com sucesso" 
+	);
+	
 	if (trim ( $_POST ["categoria"] ) == "") {
 		$msgRetorno ["msg"] = "Nome da categoria não informado.";
-		return 1;
+		$msgRetorno ["erro"] = 1;
+		return $msgRetorno;
 	}
 	
 	$categoria = new Categoria ( 0, $_POST ["categoria"] );
@@ -35,11 +48,17 @@ function salvar() {
 	$categoriaDao = new CategoriaDaoImpl ();
 	
 	if ($categoriaDao->buscar ( $categoria->getDescricao () ) != null) {
-		throw new Exception ( 'Categoria com nome "' . $categoria->getDescricao () . '" já existe.' );
+		$msgRetorno ["msg"] = 'Categoria com nome "' . $categoria->getDescricao () . '" já existe.';
+		$msgRetorno ["erro"] = 2;
+		return $msgRetorno;
 	}
-	$categoriaDao->salvar ( $categoria );
+	if (! $categoriaDao->salvar ( $categoria )) {
+		$msgRetorno ["msg"] = "Erro ao gravar a categoria " . $categoria;
+		$msgRetorno ["erro"] = 3;
+		return $msgRetorno;
+	}
 	
-	return true;
+	return $msgRetorno;
 }
 
 $jsonFormat = json_encode ( $msgRetorno );

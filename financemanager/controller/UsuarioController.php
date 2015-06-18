@@ -36,7 +36,7 @@ print ($jsonFormat) ;
 function salvar($msgRetorno) {
 	$msgRetorno = array (
 			"erro" => 99,
-			"msg" => "SSSSSSSSSSSS" 
+			"msg" => "Erro" 
 	);
 	if (trim ( $_REQUEST ["nome"] ) == "") {
 		$msgRetorno ["msg"] = "Nome de usuário não informado.";
@@ -54,9 +54,13 @@ function salvar($msgRetorno) {
 			$msgRetorno ["msg"] = 'Usuário com login "' . $usuario->getLogin () . '" já existe.';
 			$msgRetorno ["erro"] = 4;
 		} else {
-			$usuarioDao->salvar ( $usuario );
-			$msgRetorno ["msg"] = "Salvo com sucesso";
-			$msgRetorno ["erro"] = 0;
+			if ($usuarioDao->salvar ( $usuario )) {
+				$msgRetorno ["msg"] = "Salvo com sucesso";
+				$msgRetorno ["erro"] = 0;
+			} else {
+				$msgRetorno ["msg"] = $ret . "Erro ao salvar o usuário " . $usuario->getNome ();
+				$msgRetorno ["erro"] = 5;
+			}
 		}
 	}
 	return $msgRetorno;

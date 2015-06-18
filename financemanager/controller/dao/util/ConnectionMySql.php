@@ -32,9 +32,9 @@ function geraQuery($sql) {
 	$con = getConnection ();
 	try {
 		$result = mysql_query ( $sql );
-		if (! $result) {
+		/*if (! $result) {
 			throw new Exception ( "Query inválida: " . mysql_error () );
-		}
+		}*/
 	} finally {
 		mysql_close ( $con );
 		return $result;

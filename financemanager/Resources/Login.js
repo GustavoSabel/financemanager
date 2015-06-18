@@ -17,7 +17,7 @@ $(document).ready(function() {
 		// valores = '{ "username": "usuario", "password": "senha", "operacao":
 		// "logar" }';
 
-		$("#msg").html("Validando o usuário, aguarde ...");
+		exibirMensagemStatus("Validando o usuário, aguarde ...");
 		$.ajax({
 			type : "post",
 			url : "../controller/LoginController.php",
@@ -31,15 +31,13 @@ $(document).ready(function() {
 					// $("#msg").addClass("sucesso");
 					window.location.reload();
 				} else {
-					$("#msg").html(result.msg);
-					$("#msg").addClass("erro");
+					exibirMensagem(result.erro, result.msg);
 				}
 			},
 			error : function(result, txt) {
 				// alert(result);
 				console.log(result);
-				$("#msg").html("Erro: " + txt);
-				$("#msg").addClass("erro");
+				exibirMensagem(-1, txt);
 			}
 		});
 	});
