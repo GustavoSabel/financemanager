@@ -26,9 +26,8 @@ MODIFY `idcategoria` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=0;
 CREATE TABLE IF NOT EXISTS `transacao` (
    `idtransacao`  int(11)  not null,
    `descricao` varchar(255),   
-   `valortotal`  decimal(19,2),
-   `numeroparcelas`  int(11),
    `tipo` integer,
+   `data` date,
   primary key (`idtransacao`)
 ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COMMENT='Transações financeiras';
 
