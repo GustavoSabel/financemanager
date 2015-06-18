@@ -4,7 +4,7 @@
 session_start ();
 require_once ("../controller/funcoesController.php");
 validaSessao ();
-$usuario = usuarioLogado ();
+$categoria = usuarioLogado ();
 ?>
 
 <html>
@@ -19,7 +19,7 @@ $usuario = usuarioLogado ();
 <body>
 	<header>
 		<div id="usuarioLogado">
-			<span><?php echo($usuario) ?></span> <a href="#" id="logoff">Sair</a>
+			<span><?php echo($categoria) ?></span> <a href="#" id="logoff">Sair</a>
 		</div>
 		<div class="cabecalho">
 			<h1>Cadastro de categoria</h1>

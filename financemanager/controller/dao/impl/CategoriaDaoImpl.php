@@ -23,6 +23,7 @@ class CategoriaDaoImpl implements DAO {
 	}
 	public function listarTodos() {
 		$result = geraQuery ( "select " . Categoria::$CAMPO_ID . ", " . Categoria::$CAMPO_DESCRICAO . " from " . Categoria::$TABELA );
+		
 		return $result;
 	}
 	public function editar($info) {
