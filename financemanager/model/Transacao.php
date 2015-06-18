@@ -15,7 +15,7 @@
     public static $CAMPO_DATA        = "data";
     public static $CAMPO_IDUSUARIO   = "idusuario";
     public static $CAMPO_IDPESSOA    = "idpessoa";
-    public static $CAMPO_IDCATEGORIA = "categoria";
+    public static $CAMPO_IDCATEGORIA = "idcategoria";
     
     function __construct($idTransacao, $descricao, $tipo, $data, $idUsuario, $idPessoa, $idCategoria) {
       $this->idTransacao = $idTransacao;
