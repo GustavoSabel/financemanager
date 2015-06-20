@@ -22,12 +22,13 @@
 		<form method="post" action="">
 			<label class="formulario categoria" for="categoria">Categoria</label>
 			<input type="text" id="categoria" name="categoria" maxlength="150" />
-			<br> <input type="submit" id="submit" name="cadastrar" value="Cadastrar" /> <input
-				type="reset" value="Limpar" /> <br> <input type="hidden"
-				name="operacao" value="salvar"> <br>
+			<br> <input type="submit" id="submit" name="cadastrar"
+				value="Cadastrar" /> <input type="reset" value="Limpar" /> <br> <input
+				type="hidden" name="operacao" value="salvar">
 		</form>
 		<div id="msg"></div>
 	</section>
+	<?php include("tabelacategorias.php")?>
 	<footer>
 		<span> All Rights Reserved. </span>
 	</footer>

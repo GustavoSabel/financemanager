@@ -1,13 +1,27 @@
+var campoMensagem = "#msg";
+var classeErro = "erro";
+var classeSucesso = "sucesso";
+var classeMensagem = "mensagem";
+
 function exibirMensagemErro(mensagem) {
-	$("#msg").removeClass();
-	$("#msg").html(mensagem);
-	$("#msg").addClass("erro");
+	$(campoMensagem).removeClass();
+	$(campoMensagem).html(mensagem);
+	$(campoMensagem).addClass(classeErro);
 }
 
 function exibirMensagemSucesso(mensagem) {
-	$("#msg").removeClass();
-	$("#msg").html(mensagem);
-	$("#msg").addClass("sucesso");
+	$(campoMensagem).removeClass();
+	$(campoMensagem).html(mensagem);
+	$(campoMensagem).addClass(classeSucesso);
+}
+
+function exibirMensagemPadrao(resposta) {
+	console.log(resposta);
+	if (resposta.erro == 0) {
+		exibirMensagemSucesso(resposta.msg)
+	} else {
+		exibirMensagemErro(resposta.msg)
+	}
 }
 
 function exibirMensagem(codigoErro, mensagem) {
@@ -20,7 +34,7 @@ function exibirMensagem(codigoErro, mensagem) {
 }
 
 function exibirMensagemStatus(mensagem) {
-	$("#msg").removeClass();
-	$("#msg").html(mensagem);
-	$("#msg").addClass("mensagem");
+	$(campoMensagem).removeClass();
+	$(campoMensagem).html(mensagem);
+	$(campoMensagem).addClass(classeMensagem);
 }

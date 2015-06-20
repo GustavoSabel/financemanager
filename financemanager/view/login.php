@@ -40,8 +40,8 @@ if (existeUsuarioLogado ()) {
 			<input type="submit" id="submitLogin" name="submitLogin"
 				value="validar" />
 		</form>
-		<a href="cadastrousuario.php">Cadastrar novo usuário</a>
 		<div id="msg"></div>
+		<a href="cadastrousuario.php">Cadastrar novo usuário</a>
 	</section>
 	<footer>
 		<span> All Rights Reserved. </span>

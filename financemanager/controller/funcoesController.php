@@ -19,6 +19,19 @@ function getPathFinanceManager() {
 	}
 	return $path;
 }
+/**
+ * Monta uma mensagem padrão de retorno para exibir ao usuário
+ * @param unknown $codigo Código da mensagem
+ * @param unknown $mensagem Mensagem
+ * @return multitype:unknown Matriz com os dados da mensagem
+ */
+function criaMensagemRetorno($codigo, $mensagem) {
+	$msgRetorno = array (
+			"erro" => $codigo,
+			"msg" => $mensagem 
+	);
+	return $msgRetorno;
+}
 
 /**
  * Redireciona para outra página enviando uma mensagem

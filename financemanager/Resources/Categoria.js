@@ -3,14 +3,14 @@ $(document).ready(function() {
 		e.preventDefault();
 
 		var categoria = $("#categoria").val();
-		if(categoria == ""){
+		if (categoria == "") {
 			exibirMensagemErro("Categoria não informada");
 			return;
 		}
 
 		var valores = {
 			"categoria" : categoria,
-			"operacao": "salvar"
+			"operacao" : "salvar"
 		};
 
 		exibirMensagemStatus("Cadastrando, aguarde...");
@@ -29,3 +29,15 @@ $(document).ready(function() {
 		});
 	});
 });
+
+function deletar(idCaregoria) {
+	var dados = { "idCategoria" : idCaregoria };
+	$.post("../controller/CategoriaController.php?operacao=excluir", dados, function(retorno) {
+		exibirMensagemPadrao(retorno);
+		$("tr#categoria-"+idCaregoria).remove();
+	});
+}
+
+function editar(idCategoria) {
+	alert('editar ' + idCategoria);
+}

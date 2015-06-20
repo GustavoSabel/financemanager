@@ -1,6 +1,29 @@
 <?php
 
-// Conecta ao banco de dDados "financemanager"
+/**
+ * Abre a conexão com o banco de dados
+ * @throws Exception
+ * @return mysqli
+ */
+function getConnectionMysqli() {
+	$host = "localhost";
+	$db_name = "financemanager";
+	$user = "root";
+	$password = "";
+
+	$mysqli = new mysqli($host, $user, $password, $db_name);
+	$link = mysql_connect ( $host, $user, $password );
+	if ($mysqli->connect_errno) {
+		printf("Connect failed: %s\n", $mysqli->connect_error);
+		throw new Exception ( "Não foi possível conectar no mysql: " . $mysqli->connect_error );
+	}
+	return $mysqli;
+}
+
+/**
+ * Conecta ao banco de dDados "financemanager"
+ * This extension is deprecated as of PHP 5.5.0, and will be removed in the future. 
+ */
 function getConnection() {
 	$host = "localhost";
 	$db_name = "financemanager";
@@ -27,7 +50,11 @@ function geraTempo() {
 	// return mktime(date('H')-2, date('i'), date('s'));
 }
 
-// Retorna uma query mysql de um script
+/**
+ * Retorna uma query mysql de um script
+ * @param unknown $sql
+ * @return mixed
+ */
 function geraQuery($sql) {
 	$con = getConnection ();
 	try {
@@ -37,6 +64,40 @@ function geraQuery($sql) {
 		}*/
 	} finally {
 		mysql_close ( $con );
+		return $result;
+	}
+}
+
+/**
+ * Faz um insert, udpate ou delete
+ * @param unknown $sql commando insert
+ * @param unknown $id Se for insert, retorna por referencia o código AUTO_INCREMENT inserido
+ * @return boolean False se falhar ou True se executar com sucesso
+ */
+function execQuery($sql, &$id = 0) {
+	$mysqli = getConnectionMysqli();
+	try {
+		$result = $mysqli->real_query($sql);
+		printf($mysqli->error);
+		$id = $mysqli->insert_id;
+	} finally {
+		$mysqli->close();
+		return $result;
+	}
+}
+
+/**
+ * Faz um elect
+ * @param unknown $sql commando insert
+ * @param unknown $id retorna por referencia o código UTO_INCREMENT inserido
+ * @return mysqli_result
+ */
+function selectQuery($sql) {
+	$mysqli = getConnectionMysqli();
+	try {
+		$result = $mysqli->query($sql);
+	} finally {
+		$mysqli->close();
 		return $result;
 	}
 }
