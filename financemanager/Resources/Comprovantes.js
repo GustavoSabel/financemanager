@@ -21,13 +21,12 @@ function gerarTabela(arquivos) {
 	}
 }
 
-
 function addLinha(caminho, nome){
 	var linhas =
 	    " <tr>" +
 		" <td>"+ nome +"</td>"+
 		" <td width='16px'>"+
-			" <a href='"+caminho+"'>Visualizar</a>" +
+			" <a href='"+caminho+"' download>Visualizar</a>" +
 		" </td>"+
 		" </tr>";
 	$('#comprovantes tbody').append(linhas);

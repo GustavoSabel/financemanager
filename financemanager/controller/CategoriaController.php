@@ -93,13 +93,9 @@ defineHeaderRetornoJson ();
 
 switch ($_SERVER ['REQUEST_METHOD']) {
 	case 'GET' :
-		//Por padrão retorna todas as categorias
-		switch ($_GET ["operacao"]) {
-			default :
-				$mysqliResult = listarCategorias ();
-				$arquivos = $mysqliResult->fetch_all ( MYSQLI_ASSOC );
-				break;
-		}
+		// Por padrão retorna todas as categorias
+		$mysqliResult = listarCategorias ();
+		$arquivos = $mysqliResult->fetch_all ( MYSQLI_ASSOC );
 		break;
 	case 'POST' :
 		defineHeaderRetornoJson ();
