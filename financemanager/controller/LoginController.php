@@ -6,7 +6,7 @@ header ( 'Content-type: application/json' );
 header ( 'Access-Control-Allow-Origin: *' );
 header ( 'Access-Control-Allow-Headers: X-Requested-With' );
 
-$retorno = array (
+$arquivos = array (
 		"erro" => 99,
 		"msg" => "Erro indefinido" 
 );
@@ -23,26 +23,26 @@ switch ($_SERVER ['REQUEST_METHOD']) {
 						session_start ();
 						$_SESSION [SESSION_USER] = $categoria->getNome ();
 						$_SESSION [SESSION_USER_ID] = $categoria->getIdUsuario();
-						$retorno ["erro"] = 0;
-						$retorno ["msg"] = "Usuário autenticado";
+						$arquivos ["erro"] = 0;
+						$arquivos ["msg"] = "Usuário autenticado";
 					} else {
-						$retorno ["erro"] = 1;
-						$retorno ["msg"] = "Senha inválida";
+						$arquivos ["erro"] = 1;
+						$arquivos ["msg"] = "Senha inválida";
 					}
 				} else {
-					$retorno ["erro"] = 2;
-					$retorno ["msg"] = "Usuário inválido";
+					$arquivos ["erro"] = 2;
+					$arquivos ["msg"] = "Usuário inválido";
 				}
 				break;
 			case "logoff" :
 				session_start ();
 				$_SESSION [SESSION_USER] = "";
-				$retorno ["erro"] = 0;
-				$retorno ["msg"] = "Usuário desconectado";
+				$arquivos ["erro"] = 0;
+				$arquivos ["msg"] = "Usuário desconectado";
 				break;
 			default :
-				$retorno ["erro"] = 99;
-				$retorno ["msg"] = "Operação inválida";
+				$arquivos ["erro"] = 99;
+				$arquivos ["msg"] = "Operação inválida";
 		}
 		// }
 		break;
@@ -50,6 +50,6 @@ switch ($_SERVER ['REQUEST_METHOD']) {
 		break;
 	default :
 }
-$jsonFormat = json_encode ( $retorno );
+$jsonFormat = json_encode ( $arquivos );
 print ($jsonFormat) ;
 ?>

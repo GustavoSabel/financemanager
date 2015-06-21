@@ -97,7 +97,7 @@ switch ($_SERVER ['REQUEST_METHOD']) {
 		switch ($_GET ["operacao"]) {
 			default :
 				$mysqliResult = listarCategorias ();
-				$retorno = $mysqliResult->fetch_all ( MYSQLI_ASSOC );
+				$arquivos = $mysqliResult->fetch_all ( MYSQLI_ASSOC );
 				break;
 		}
 		break;
@@ -108,29 +108,29 @@ switch ($_SERVER ['REQUEST_METHOD']) {
 		switch ($_GET ["operacao"]) {
 			case 'salvar' :
 				$categoria = new Categoria ( 0, $_POST ["categoria"] );
-				$retorno = salvar ( $categoria );
-				$retorno ["categoria"] = array (
+				$arquivos = salvar ( $categoria );
+				$arquivos ["categoria"] = array (
 						"id" => $categoria->getId (),
 						"descricao" => $categoria->getDescricao () 
 				);
 				break;
 			case 'editar' :
 				$categoria = new Categoria ( $_POST ["id"], $_POST ["categoria"] );
-				$retorno = editar ( $categoria );
-				$retorno ["categoria"] = array (
+				$arquivos = editar ( $categoria );
+				$arquivos ["categoria"] = array (
 						"id" => $categoria->getId (),
 						"descricao" => $categoria->getDescricao () 
 				);
 				break;
 			case 'excluir' :
-				$retorno = excluir ( $_POST ["idCategoria"] );
+				$arquivos = excluir ( $_POST ["idCategoria"] );
 				break;
 			case 'listar' :
 				$mysqliResult = listarCategorias ();
-				$retorno = $mysqliResult->fetch_all ( MYSQLI_ASSOC );
+				$arquivos = $mysqliResult->fetch_all ( MYSQLI_ASSOC );
 				break;
 			default :
-				$retorno = criaMensagemRetorno ( 10, "Operação " . $_GET ["operacao"] . " inválida" );
+				$arquivos = criaMensagemRetorno ( 10, "Operação " . $_GET ["operacao"] . " inválida" );
 		}
 		break;
 	// case 'PUT' :
@@ -145,6 +145,6 @@ switch ($_SERVER ['REQUEST_METHOD']) {
 	// $msgRetorno ["msg"] = "GET Ainda não implementado";
 	// break;
 }
-$jsonFormat = json_encode ( $retorno );
+$jsonFormat = json_encode ( $arquivos );
 print ($jsonFormat) ;
 ?>

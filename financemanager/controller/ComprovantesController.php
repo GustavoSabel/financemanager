@@ -5,19 +5,34 @@ switch ($_SERVER ['REQUEST_METHOD']) {
 	case 'GET' :
 		defineHeaderRetornoJson();
 		
-		//Buscar os arquivos da pasta financemanager/arquivos/usert_[codigo do usuario]/[nome do arquivo]
-		$file1 = array("caminho" => PATH_FINANCEMANAGER . "/arquivos/user_1/0aaaa.txt", "descricao"=>"0aaaa.txt");
-		$file2 = array("caminho" => PATH_FINANCEMANAGER . "/arquivos/user_1/EstadoRainhas.java", "descricao"=>"EstadoRainhas.java");
-		$retorno = array(0=>$file1, 1=>$file2);
+		session_start();
+		$directoryUser = PATH_FINANCEMANAGER . "/arquivos/user_" . $_SESSION[SESSION_USER_ID];
+// 		$directoryUserServer = __DIR__ . "/../arquivos/user_" . $_SESSION[SESSION_USER_ID];
+		$directoryUserServer = "../arquivos/user_" . $_SESSION[SESSION_USER_ID];
 		
-		print (json_encode ( $retorno )) ;
+		$arquivos = array();
+			
+// 		$filenames = scandir($directoryUserServer);
+// 		foreach ($filenames as $filename) {
+// 			array_push($arquivos, array("caminho" => $directoryUser . "/" . $filename, "descricao" => $filename));
+// 		}
+		
+		if(is_dir($directoryUserServer)){
+			foreach (new DirectoryIterator($directoryUserServer) as $fileInfo) {
+				if($fileInfo->isDot()) continue;
+				$file =  $fileInfo->getFilename();
+				array_push($arquivos, array("caminho" => $directoryUser . "/" . $file, "descricao" => $file));
+			}
+		}
+		
+		print (json_encode ( $arquivos )) ;
 		
 		break;
 	case 'POST' :
 		switch ($_POST ["operacao"]) {
 			case "upload" :
 				
-				$retorno = criaMensagemRetorno ( 99, "Erro indefinido" );
+				$arquivos = criaMensagemRetorno ( 99, "Erro indefinido" );
 				$campoArquivo = "arquivoParaUpload";
 				
 				session_start ();
@@ -32,22 +47,22 @@ switch ($_SERVER ['REQUEST_METHOD']) {
 				
 				// Check if file already exists
 				if (file_exists ( $target_file )) {
-					$retorno = criaMensagemRetorno ( 1, "Ja existe um arquivo com este nome." );
+					$arquivos = criaMensagemRetorno ( 1, "Ja existe um arquivo com este nome." );
 				} else if ($_FILES [$campoArquivo] ["size"] > 500000) {
-					$retorno = criaMensagemRetorno ( 2, "Arquivo muito grande." );
+					$arquivos = criaMensagemRetorno ( 2, "Arquivo muito grande." );
 				} else if ($imageFileType == "exe") {
-					$retorno = criaMensagemRetorno ( 3, "Formato de arquivo não aceito" );
+					$arquivos = criaMensagemRetorno ( 3, "Formato de arquivo não aceito" );
 				} else {
 					if (move_uploaded_file ( $_FILES [$campoArquivo] ["tmp_name"], $target_file )) {
-						$retorno = criaMensagemRetorno ( 0, "O arquivo " . basename ( $_FILES [$campoArquivo] ["name"] ) . " foi carregado com sucesso." );
+						$arquivos = criaMensagemRetorno ( 0, "O arquivo " . basename ( $_FILES [$campoArquivo] ["name"] ) . " foi carregado com sucesso." );
 					} else {
-						$retorno = criaMensagemRetorno ( 4, "Ocorreu um erro ao fazer upload do arquivo" );
+						$arquivos = criaMensagemRetorno ( 4, "Ocorreu um erro ao fazer upload do arquivo" );
 					}
 				}
 				
 				// $jsonFormat = json_encode ( $retorno );
 				// print ($jsonFormat) ;
-				redireMsgErro ( "../view/comprovantes.php", $retorno ["erro"], $retorno ["msg"] );
+				redireMsgErro ( "../view/comprovantes.php", $arquivos ["erro"], $arquivos ["msg"] );
 		}
 }
 ?>

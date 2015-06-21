@@ -27,7 +27,6 @@
 			type="reset" value="Limpar" />
 	</form>
 
-	
 	<?php
 		if (isset ( $_GET ["msg"] )) {
 			$msg = $_GET ["msg"];
