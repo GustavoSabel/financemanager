@@ -6,14 +6,14 @@ header ( 'Content-type: application/json' );
 header ( 'Access-Control-Allow-Origin: *' );
 header ( 'Access-Control-Allow-Headers: X-Requested-With' );
 
-$msgRetorno = array (
+$retorno = array (
 		"erro" => 99,
 		"msg" => "Erro indefinido" 
 );
 
 switch ($_SERVER ['REQUEST_METHOD']) {
 	case 'POST' :
-		$msgRetorno = salvar ( $msgRetorno );
+		$retorno = salvar ( $retorno );
 		break;
 	// Não consegui pegar as varáveis via $_REQUEST com o PUT
 	/*
@@ -26,12 +26,12 @@ switch ($_SERVER ['REQUEST_METHOD']) {
 	 * break;
 	 */
 	case 'GET' :
-		$msgRetorno ["erro"] = 999;
-		$msgRetorno ["msg"] = "GET Ainda não implementado";
+		$retorno ["erro"] = 999;
+		$retorno ["msg"] = "GET Ainda não implementado";
 		break;
 }
 
-$jsonFormat = json_encode ( $msgRetorno );
+$jsonFormat = json_encode ( $retorno );
 print ($jsonFormat) ;
 function salvar($msgRetorno) {
 	$msgRetorno = array (

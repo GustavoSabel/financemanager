@@ -28,7 +28,7 @@
 		</form>
 		<div id="msg"></div>
 	</section>
-	<?php include("tabelacategorias.php")?>
+	<?php include("componenteTabelaCategorias.html")?>
 	<footer>
 		<span> All Rights Reserved. </span>
 	</footer>

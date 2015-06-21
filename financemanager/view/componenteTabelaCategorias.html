@@ -1,0 +1,65 @@
+<script>
+var categorias;
+$(document).ready(function(){
+	categorias = null;
+	$.ajax({
+		type : "get",
+		url : "../controller/CategoriaController.php?operacao=listar",
+		dataType : "json",
+		success : function(categorias) {
+			console.log(result);
+			for (var i = 0; i < categorias.length; i++) {
+				addLinha(categorias[i].idcategoria, categorias[i].descricao, false);
+			}
+		},
+		error : function(result, txt) {
+			console.log(result);
+			exibirMensagem(-1, txt);
+		}
+	});
+});
+
+function excluirCategoriaTabela(idCategoria) {
+	$("tr#categoria-" + idCategoria).hide("slow", function(){
+		this.remove();
+	});
+}
+
+function inserirCategoriaTabela(idCategoria, nomeCategoria){
+// 	categorias.push({"idcategoria":idCategoria, "descricao":nomeCategoria});
+	addLinha(idCategoria, nomeCategoria, true);
+}
+
+function addLinha(idCategoria, nomeCategoria, top){
+	var linhas =
+	    " <tr id='categoria-" + idCategoria + "'>" +
+		" <td>"+ nomeCategoria +"</td>"+
+		" <td width='16px'>"+
+			" <a href='#' onClick='editar(" + idCategoria + ")'> " + 
+			" <img class='link_edit' src='../Resources/Imagens/edit.png' /></a>" +
+		" </td>"+
+		" <td width='16px'>"+
+			" <a href='#' onClick='deletar(" + idCategoria + ")'> " +
+			" <img class='link_delete' src='../Resources/Imagens/delete.png' /></a>" +
+		" </td>"+
+		" </tr>";
+		if(top){
+			$('#categorias tbody').html(linhas + $('#categorias tbody').html());
+		} else {
+			$('#categorias tbody').append(linhas);
+		}
+}
+</script>
+<table id="categorias">
+	<thead>
+		<th>Categoria</th>
+		<th>Alterar</th>
+		<th>Exluir</th>
+	</thead>
+	<tbody>
+	
+	
+	</tbody>
+
+</table>
+

@@ -20,7 +20,11 @@ $(document).ready(function() {
 			dataType : "json",
 			data : valores,
 			success : function(result) {
+				console.log(result);
 				exibirMensagem(result.erro, result.msg);
+				if (result.erro == 0) {
+					inserirCategoriaTabela(result.categoria.id, result.categoria.descricao);
+				}
 			},
 			error : function(result, txt) {
 				console.log(result);
@@ -31,10 +35,12 @@ $(document).ready(function() {
 });
 
 function deletar(idCaregoria) {
-	var dados = { "idCategoria" : idCaregoria };
+	var dados = {
+		"idCategoria" : idCaregoria
+	};
 	$.post("../controller/CategoriaController.php?operacao=excluir", dados, function(retorno) {
 		exibirMensagemPadrao(retorno);
-		$("tr#categoria-"+idCaregoria).remove();
+		excluirCategoriaTabela(idCaregoria);
 	});
 }
 

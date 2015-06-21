@@ -31,7 +31,8 @@ $(document).ready(function() {
 					// $("#msg").addClass("sucesso");
 					window.location.reload();
 				} else {
-					exibirMensagem(result.erro, result.msg);
+					exibirMensagemPadrao(result);
+//					exibirMensagem(result.erro, result.msg);
 				}
 			},
 			error : function(result, txt) {
