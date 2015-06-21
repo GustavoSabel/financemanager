@@ -7,7 +7,7 @@ $(document).ready(function(){
 		url : "../controller/CategoriaController.php?operacao=listar",
 		dataType : "json",
 		success : function(categorias) {
-			console.log(result);
+			console.log(categorias);
 			for (var i = 0; i < categorias.length; i++) {
 				addLinha(categorias[i].idcategoria, categorias[i].descricao, false);
 			}
