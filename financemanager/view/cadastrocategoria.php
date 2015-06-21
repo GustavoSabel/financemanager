@@ -2,7 +2,7 @@
 <?php include("componenteUsuarioLogado.php")?>
 <html>
 <head>
-<meta charset="utf-8">
+<meta charset="utf-8"/>
 <title>Cadastro de categoria</title>
 <link rel="stylesheet" href="../Resources/Estilos.css">
 <script

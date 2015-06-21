@@ -2,6 +2,7 @@ $(document).ready(function() {
 	$("input:reset").click(function(e, a) {
 		$("#editando").html("");
 		$("#idCategoria").val("");
+		$("#msg").html("");
 	});
 	
 	$("#submit").click(function(e) {
