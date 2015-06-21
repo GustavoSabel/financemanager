@@ -22,6 +22,7 @@ switch ($_SERVER ['REQUEST_METHOD']) {
 					if ($categoria->getSenha () == $_REQUEST ["password"]) {
 						session_start ();
 						$_SESSION [SESSION_USER] = $categoria->getNome ();
+						$_SESSION [SESSION_USER_ID] = $categoria->getIdUsuario();
 						$retorno ["erro"] = 0;
 						$retorno ["msg"] = "Usuário autenticado";
 					} else {

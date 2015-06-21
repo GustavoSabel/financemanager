@@ -19,14 +19,7 @@ function categoriaJaCadastrada($descricaoCategoria, $idIgnorar = -1) {
 	}
 	return false;
 }
-/**
- * Define o cabeçalho da mensagem em caso de requisição json
- */
-function defineHeaderRetornoJson() {
-	header ( 'Content-type: application/json' );
-	header ( 'Access-Control-Allow-Origin: *' );
-	header ( 'Access-Control-Allow-Headers: X-Requested-With' );
-}
+
 /**
  * Persiste essa categoria
  *

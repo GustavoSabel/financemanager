@@ -143,6 +143,10 @@ label.transacao {
 	width: 150px;
 }
 
+label.comprovante {
+	width: 155px;
+}
+
 #msg {
 	
 }
@@ -174,6 +178,11 @@ label.transacao {
 	width:16px; 
 	height:16px; 
 }
+
+input.arquivo {
+	width: calc(100% - 170px);
+}
+
 /* 
 	Cusco Sky table styles
 	written by Braulio Soncco http://www.buayacorp.com

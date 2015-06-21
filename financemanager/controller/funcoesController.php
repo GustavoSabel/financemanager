@@ -1,5 +1,6 @@
 <?php
 define ( "SESSION_USER", "username####" );
+define ( "SESSION_USER_ID", "id_username####" );
 define ( "PATH_FINANCEMANAGER", getPathFinanceManager () );
 
 /**
@@ -33,6 +34,15 @@ function criaMensagemRetorno($codigo, $mensagem) {
 	return $msgRetorno;
 }
 
+function criaMensagemRetornoJSon($codigo, $mensagem) {
+	$msgRetorno = array (
+			"erro" => $codigo,
+			"msg" => $mensagem
+	);
+	$jsonFormat = json_encode ( $msgRetorno );
+	return $jsonFormat;
+}
+
 /**
  * Redireciona para outra página enviando uma mensagem
  */
@@ -41,12 +51,19 @@ function redireMsg($local, $mensagem) {
 }
 
 /**
+ * Redireciona para outra página enviando uma mensagem
+ */
+function redireMsgErro($local, $erro, $mensagem) {
+	header ( "location:" . $local . "?erro=".$erro."&msg=" . $mensagem );
+}
+
+/**
  * Verifica se existe algum usuário logado
  *
  * @return boolean
  */
 function existeUsuarioLogado() {
-	return (isset ( $_SESSION [SESSION_USER] ) && ($_SESSION [SESSION_USER] != ""));
+	return (isset ( $_SESSION [SESSION_USER] ) && ($_SESSION[SESSION_USER] != ""));
 }
 
 /**
@@ -80,10 +97,19 @@ function gotoLogin() {
  */
 function usuarioLogado() {
 	if (existeUsuarioLogado ()) {
-		return $_SESSION [SESSION_USER];
+		return $_SESSION[SESSION_USER];
 	} else {
 		return "Nenhum usuário logado";
 	}
+}
+
+/**
+ * Define o cabeçalho da mensagem em caso de requisição json
+ */
+function defineHeaderRetornoJson() {
+	header ( 'Content-type: application/json' );
+	header ( 'Access-Control-Allow-Origin: *' );
+	header ( 'Access-Control-Allow-Headers: X-Requested-With' );
 }
 
 ?>
