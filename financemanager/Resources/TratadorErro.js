@@ -16,11 +16,15 @@ function exibirMensagemSucesso(mensagem) {
 }
 
 function exibirMensagemPadrao(resposta) {
-	console.log(resposta);
-	if (resposta.erro == 0) {
-		exibirMensagemSucesso(resposta.msg)
+	if(typeof resposta =='object'){
+		console.log(resposta);
+		if (resposta.erro == 0) {
+			exibirMensagemSucesso(resposta.msg)
+		} else {
+			exibirMensagemErro(resposta.msg)
+		}
 	} else {
-		exibirMensagemErro(resposta.msg)
+		exibirMensagemErro("Ocorreu um erro durante o processo");
 	}
 }
 

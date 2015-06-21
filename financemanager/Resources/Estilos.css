@@ -155,6 +155,9 @@ label.transacao {
 	color: #00FF00;
 }
 
+.mensagem {
+	color: #0000FF;
+}
 #usuarioLogado {
 	position: absolute;
 	right: 20px;

@@ -19,12 +19,16 @@
 	</header>
 	<?php include("componenteNavegacao.html")?>
 	<section>
+		<span id="editando" class="mensagem"></span>
 		<form method="post" action="">
 			<label class="formulario categoria" for="categoria">Categoria</label>
 			<input type="text" id="categoria" name="categoria" maxlength="150" />
-			<br> <input type="submit" id="submit" name="cadastrar"
-				value="Cadastrar" /> <input type="reset" value="Limpar" /> <br> <input
-				type="hidden" name="operacao" value="salvar">
+			<br> 
+			<input type="submit" id="submit" name="cadastrar" value="Gravar" /> 
+			<input type="reset" value="Limpar" /> 
+			<br> 
+			<input type="hidden" name="operacao" value="salvar">
+			<input type="hidden" name="idCategoria" id="idCategoria"/>
 		</form>
 		<div id="msg"></div>
 	</section>

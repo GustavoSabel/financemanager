@@ -6,11 +6,10 @@ $(document).ready(function(){
 		type : "get",
 		url : "../controller/CategoriaController.php?operacao=listar",
 		dataType : "json",
-		success : function(categorias) {
-			console.log(categorias);
-			for (var i = 0; i < categorias.length; i++) {
-				addLinha(categorias[i].idcategoria, categorias[i].descricao, false);
-			}
+		success : function(result) {
+			console.log(result);
+			categorias = result;
+			gerarTabela();
 		},
 		error : function(result, txt) {
 			console.log(result);
@@ -19,14 +18,48 @@ $(document).ready(function(){
 	});
 });
 
+function gerarTabela() {
+	$('#categorias tbody').html("");
+	for (var i = 0; i < categorias.length; i++) {
+		addLinha(categorias[i].idcategoria, categorias[i].descricao, false);
+	}
+}
+
+function getCategoria(idCategoria) {
+	for (var i = 0; i < categorias.length; i++) {
+		if(categorias[i].idcategoria == idCategoria){
+			return categorias[i];
+		}
+	}
+}
+
 function excluirCategoriaTabela(idCategoria) {
+	for (var i = 0; i < categorias.length; i++) {
+		if(categorias[i].idcategoria == idCategoria){
+			categorias.splice(i, 1);
+			break;
+		}
+	}
+	
 	$("tr#categoria-" + idCategoria).hide("slow", function(){
 		this.remove();
 	});
 }
 
+function alterarCategoriaTabela(id, descricao) {
+	for (var i = 0; i < categorias.length; i++) {
+		if(categorias[i].idcategoria == id){
+			categorias[i].descricao = descricao;
+			break;
+		}
+	}
+
+	//Gera a tabela toda pra que a categoria editada fique no mesmo lugar
+	gerarTabela();
+}
+
 function inserirCategoriaTabela(idCategoria, nomeCategoria){
-// 	categorias.push({"idcategoria":idCategoria, "descricao":nomeCategoria});
+	categorias.push({"idcategoria":idCategoria, "descricao":nomeCategoria});
 	addLinha(idCategoria, nomeCategoria, true);
 }
 
@@ -35,7 +68,7 @@ function addLinha(idCategoria, nomeCategoria, top){
 	    " <tr id='categoria-" + idCategoria + "'>" +
 		" <td>"+ nomeCategoria +"</td>"+
 		" <td width='16px'>"+
-			" <a href='#' onClick='editar(" + idCategoria + ")'> " + 
+			" <a href='#' onClick='editar(getCategoria(" + idCategoria + "))'> " + 
 			" <img class='link_edit' src='../Resources/Imagens/edit.png' /></a>" +
 		" </td>"+
 		" <td width='16px'>"+
@@ -52,14 +85,13 @@ function addLinha(idCategoria, nomeCategoria, top){
 </script>
 <table id="categorias">
 	<thead>
-		<th>Categoria</th>
-		<th>Alterar</th>
-		<th>Exluir</th>
+		<tr>
+			<th>Categoria</th>
+			<th>Alterar</th>
+			<th>Exluir</th>
+		</tr>
 	</thead>
 	<tbody>
-	
-	
 	</tbody>
-
 </table>
 

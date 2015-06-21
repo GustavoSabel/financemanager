@@ -2,6 +2,7 @@
 require_once ("../controller/dao/DAO.php");
 require_once ("../controller/dao/util/ConnectionMySql.php");
 require_once ("../model/Categoria.php");
+
 class CategoriaDaoImpl implements DAO {
 	public function salvar($info) {
 		$id = 0;
@@ -12,12 +13,12 @@ class CategoriaDaoImpl implements DAO {
 	}
 	
 	public function excluir($codigo) {
-		$result = selectQuery( "DELETE FROM " . Categoria::$TABELA . " WHERE " . Categoria::$CAMPO_ID . " = " . $codigo );
+		$result = performQuery( "DELETE FROM " . Categoria::$TABELA . " WHERE " . Categoria::$CAMPO_ID . " = " . $codigo );
 		return $result;
 	}
 	
 	public function buscar($descricao) {
-		$result = selectQuery ( "select " . Categoria::$CAMPO_ID . ", " . Categoria::$CAMPO_DESCRICAO . " from " . Categoria::$TABELA . " where " . Categoria::$CAMPO_DESCRICAO . " = '" . $descricao . "'" );
+		$result = performQuery ( "select " . Categoria::$CAMPO_ID . ", " . Categoria::$CAMPO_DESCRICAO . " from " . Categoria::$TABELA . " where " . Categoria::$CAMPO_DESCRICAO . " = '" . $descricao . "'" );
 		if ($result->num_rows > 0) {
 			if ($usuarios = $result->fetch_array()) {
 				return new Categoria ( $usuarios [0], $usuarios [1] );
@@ -27,7 +28,7 @@ class CategoriaDaoImpl implements DAO {
 	}
 	
 	public function buscarParecido($descricao) {
-		$result = selectQuery ( "select " . Categoria::$CAMPO_ID . ", " . Categoria::$CAMPO_DESCRICAO . " from " . Categoria::$TABELA . " where " . Categoria::$CAMPO_DESCRICAO . " like '%" . $descricao . "%'" );
+		$result = performQuery ( "select " . Categoria::$CAMPO_ID . ", " . Categoria::$CAMPO_DESCRICAO . " from " . Categoria::$TABELA . " where " . Categoria::$CAMPO_DESCRICAO . " like '%" . $descricao . "%'" );
 		if ($result->num_rows > 0) {
 			if ($usuarios = $result->fetch_array()) {
 				return new Categoria ( $usuarios [0], $usuarios [1] );
@@ -41,12 +42,17 @@ class CategoriaDaoImpl implements DAO {
 	}
 	
 	public function listarTodos() {
-		$result = selectQuery ( "select " . Categoria::$CAMPO_ID . ", " . Categoria::$CAMPO_DESCRICAO . " from " . Categoria::$TABELA );
+		$result = performQuery ( "select " . Categoria::$CAMPO_ID . ", " . Categoria::$CAMPO_DESCRICAO . " from " . Categoria::$TABELA );
 		
 		return $result;
 	}
+	
 	public function editar($info) {
-		throw new Exception ( "Função editar não implementada." );
+		$query = " UPDATE " . Categoria::$TABELA . 
+				 " SET " . Categoria::$CAMPO_DESCRICAO . " = '" . $info->getDescricao() . "'" .	
+				 " WHERE " . Categoria::$CAMPO_ID . " = " . $info->getId();
+		$result = performQuery($query);
+		return $result;
 	}
 }
 ?>

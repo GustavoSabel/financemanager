@@ -1,7 +1,20 @@
 $(document).ready(function() {
+	$("input:reset").click(function(e, a) {
+		$("#editando").html("");
+		$("#idCategoria").val("");
+	});
+	
 	$("#submit").click(function(e) {
 		e.preventDefault();
 
+		var operacao = "salvar";
+		var id = $("#idCategoria").val();
+		if(id != "") {
+			operacao = "editar";
+		} else {
+			id = 0;
+		}
+		
 		var categoria = $("#categoria").val();
 		if (categoria == "") {
 			exibirMensagemErro("Categoria não informada");
@@ -9,6 +22,7 @@ $(document).ready(function() {
 		}
 
 		var valores = {
+			"id" : id,
 			"categoria" : categoria,
 			"operacao" : "salvar"
 		};
@@ -16,19 +30,24 @@ $(document).ready(function() {
 		exibirMensagemStatus("Cadastrando, aguarde...");
 		$.ajax({
 			type : "post",
-			url : "../controller/CategoriaController.php?operacao=salvar",
+			url : "../controller/CategoriaController.php?operacao=" + operacao,
 			dataType : "json",
 			data : valores,
 			success : function(result) {
 				console.log(result);
-				exibirMensagem(result.erro, result.msg);
+				exibirMensagemPadrao(result);
 				if (result.erro == 0) {
-					inserirCategoriaTabela(result.categoria.id, result.categoria.descricao);
+					if(operacao=="salvar"){
+						inserirCategoriaTabela(result.categoria.id, result.categoria.descricao);
+					} else {
+						alterarCategoriaTabela(result.categoria.id, result.categoria.descricao);
+					}
+					$("input:reset").trigger("click");
 				}
 			},
 			error : function(result, txt) {
 				console.log(result);
-				exibirMensagem(-1, txt);
+				exibirMensagem(-1, result.responseText);
 			}
 		});
 	});
@@ -44,6 +63,8 @@ function deletar(idCaregoria) {
 	});
 }
 
-function editar(idCategoria) {
-	alert('editar ' + idCategoria);
+function editar(categoria) {
+	$("#idCategoria").val(categoria.idcategoria);
+	$("#categoria").val(categoria.descricao);
+	$("#editando").html("Editando categoria " + categoria.descricao);
 }

@@ -9,10 +9,13 @@ require_once ("../model/Categoria.php");
  * @param unknown $categoria        	
  * @return boolean Retorna true se essa categoria já estiver gravada no banco
  */
-function categoriaJaCadastrada($categoria) {
+function categoriaJaCadastrada($descricaoCategoria, $idIgnorar = -1) {
 	$categoriaDao = new CategoriaDaoImpl ();
-	if ($categoriaDao->buscar ( $categoria ) != null) {
-		return true;
+	$categoriaCadastrada = $categoriaDao->buscar ( $descricaoCategoria );
+	if ($categoriaCadastrada != null) {
+		if ($categoriaCadastrada->getId () != $idIgnorar) {
+			return true;
+		}
 	}
 	return false;
 }
@@ -30,19 +33,36 @@ function defineHeaderRetornoJson() {
  * @param unknown $categoria        	
  * @return multitype:unknown
  */
-function salvar($categoria) {
-	if (trim ( $categoria->getDescricao() ) == "") {
+function editar($categoria) {
+	if (trim ( $categoria->getDescricao () ) == "") {
 		return criaMensagemRetorno ( 1, "Nome da categoria não informado." );
 	}
 	
-	if (categoriaJaCadastrada ( $categoria->getDescricao() )) {
-		return criaMensagemRetorno ( 2, 'Categoria com nome "' . $categoria->getDescricao() . '" já existe.' );
+	if (categoriaJaCadastrada ( $categoria->getDescricao (), $categoria->getId () )) {
+		return criaMensagemRetorno ( 2, 'Categoria com nome "' . $categoria->getDescricao () . '" já existe.' );
+	}
+	
+	$categoriaDao = new CategoriaDaoImpl ();
+	
+	if (! $categoriaDao->editar ( $categoria )) {
+		return criaMensagemRetorno ( 3, "Erro ao editar para " . $categoria->getDescricao () );
+	}
+	
+	return criaMensagemRetorno ( 0, "Categoria editada com sucesso para " . $categoria->getDescricao () );
+}
+function salvar($categoria) {
+	if (trim ( $categoria->getDescricao () ) == "") {
+		return criaMensagemRetorno ( 1, "Nome da categoria não informado." );
+	}
+	
+	if (categoriaJaCadastrada ( $categoria->getDescricao () )) {
+		return criaMensagemRetorno ( 2, 'Categoria com nome "' . $categoria->getDescricao () . '" já existe.' );
 	}
 	
 	$categoriaDao = new CategoriaDaoImpl ();
 	
 	if (! $categoriaDao->salvar ( $categoria )) {
-		return criaMensagemRetorno ( 3, "Erro ao gravar a categoria " . $categoria->getDescricao() );
+		return criaMensagemRetorno ( 3, "Erro ao gravar a categoria " . $categoria->getDescricao () );
 	}
 	
 	return criaMensagemRetorno ( 0, "Gravado com sucesso com o ID " . $categoria->getId () );
@@ -80,13 +100,12 @@ defineHeaderRetornoJson ();
 
 switch ($_SERVER ['REQUEST_METHOD']) {
 	case 'GET' :
+		//Por padrão retorna todas as categorias
 		switch ($_GET ["operacao"]) {
-			case 'listar' :
+			default :
 				$mysqliResult = listarCategorias ();
 				$retorno = $mysqliResult->fetch_all ( MYSQLI_ASSOC );
 				break;
-			default :
-				$retorno = criaMensagemRetorno ( 10, "Operação " . $_GET ["operacao"] . " inválida" );
 		}
 		break;
 	case 'POST' :
@@ -97,6 +116,14 @@ switch ($_SERVER ['REQUEST_METHOD']) {
 			case 'salvar' :
 				$categoria = new Categoria ( 0, $_POST ["categoria"] );
 				$retorno = salvar ( $categoria );
+				$retorno ["categoria"] = array (
+						"id" => $categoria->getId (),
+						"descricao" => $categoria->getDescricao () 
+				);
+				break;
+			case 'editar' :
+				$categoria = new Categoria ( $_POST ["id"], $_POST ["categoria"] );
+				$retorno = editar ( $categoria );
 				$retorno ["categoria"] = array (
 						"id" => $categoria->getId (),
 						"descricao" => $categoria->getDescricao () 
