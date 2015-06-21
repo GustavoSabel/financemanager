@@ -4,12 +4,20 @@ CREATE TABLE IF NOT EXISTS `usuario` (
    `nome`  varchar(255) not null,
    `login`  varchar(255) not null,
    `senha`  varchar(255) not null,
-  primary key (`idusuario`)
+  primary key (idusuario)
 ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COMMENT='Usuários do sistema';
 
 ALTER TABLE `usuario`
 MODIFY `idusuario` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=0;
 
+-- Arquivos
+CREATE TABLE IF NOT EXISTS arquivos (
+   idarquivo int not null AUTO_INCREMENT,
+   caminho  varchar(255) not null,
+   descricao  varchar(255) not null,
+   idusuario  int(11) not null,
+   primary key (idarquivo)
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COMMENT='Arquivos do usuário';
 
 -- Categoria
 CREATE TABLE IF NOT EXISTS `categoria` (
@@ -62,7 +70,9 @@ CREATE TABLE IF NOT EXISTS `pessoa` (
 ALTER TABLE `pessoa`
 MODIFY `idpessoa` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=0;
 
-
+-- Arquivos
+Alter table arquivos
+add constraint fk_arquivo_usuario foreign key (idusuario) references usuario (idusuario);
 
 -- Transacao_Usuario
 alter table `transacao` add column `idusuario` integer;
