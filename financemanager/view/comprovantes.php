@@ -38,17 +38,13 @@
 			echo($msg);
 			echo("</div>");
 		}
-	?>
-	
-	<br/>
-	
-	
-	
+	?>	
 <table id="comprovantes">
 	<thead>
 		<tr>
 			<th>Arquivo</th>
-			<th>Ação</th>
+			<th>Download</th>
+			<th>Visualizar</th>
 		</tr>
 	</thead>
 	<tbody>

@@ -26,7 +26,10 @@ function addLinha(caminho, nome){
 	    " <tr>" +
 		" <td>"+ nome +"</td>"+
 		" <td width='16px'>"+
-			" <a href='"+caminho+"' download>Visualizar</a>" +
+			" <a href='"+caminho+"' download>Download</a>" +
+		" </td>"+
+		" <td width='16px'>"+
+			" <a href='"+caminho+"' target='_blank'>Visualizar</a>" +
 		" </td>"+
 		" </tr>";
 	$('#comprovantes tbody').append(linhas);
