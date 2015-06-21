@@ -36,7 +36,6 @@ $(document).ready(function() {
 			data : valores,
 			success : function(result) {
 				console.log(result);
-				exibirMensagemPadrao(result);
 				if (result.erro == 0) {
 					if(operacao=="salvar"){
 						inserirCategoriaTabela(result.categoria.id, result.categoria.descricao);
@@ -45,6 +44,7 @@ $(document).ready(function() {
 					}
 					$("input:reset").trigger("click");
 				}
+				exibirMensagemPadrao(result);
 			},
 			error : function(result, txt) {
 				console.log(result);
