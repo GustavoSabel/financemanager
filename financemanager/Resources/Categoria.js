@@ -18,7 +18,7 @@ $(document).ready(function() {
 		
 		var categoria = $("#categoria").val();
 		if (categoria == "") {
-			exibirMensagemErro("Categoria não informada");
+			exibirMensagemErro("Categoria não informada.");
 			return;
 		}
 

@@ -18,6 +18,15 @@ class UsuarioDaoImpl implements DAO {
 		}
 		return null;
 	}
+	public function buscarPeloId($identificador) {
+		$result = geraQuery ( "select " . Usuario::$CAMPO_IDUSUARIO . ", " . Usuario::$CAMPO_NOME . ", " . Usuario::$CAMPO_LOGIN . ", " . Usuario::$CAMPO_SENHA . " from " . Usuario::$TABELA . " where " . Usuario::$CAMPO_IDUSUARIO . " = '" . $identificador . "'" );
+		if (geraNumeroLinhas ( $result ) > 0) {
+			if ($usuarios = geraArrayQuery ( $result )) {
+				return new Usuario ( $usuarios [0], $usuarios [1], $usuarios [2], $usuarios [3] );
+			}
+		}
+		return null;
+	}
 	public function listar($infoInicial, $infoFinal) {
 		throw new Exception ( "Função listar não implementada." );
 	}

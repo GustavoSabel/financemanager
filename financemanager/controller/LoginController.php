@@ -17,11 +17,11 @@ switch ($_SERVER ['REQUEST_METHOD']) {
 		switch ($_REQUEST ["operacao"]) {
 			case "logar" :
 				$usuarioDao = new UsuarioDaoImpl ();
-				$categoria = $usuarioDao->buscar ( $_REQUEST ["username"] );
-				if ($categoria != null) {
-					if ($categoria->getSenha () == $_REQUEST ["password"]) {
+				$usuario = $usuarioDao->buscar ( $_REQUEST ["username"] );
+				if ($usuario != null) {
+					if ($usuario->getSenha () == $_REQUEST ["password"]) {
 						session_start ();
-						$_SESSION [SESSION_USER] = $categoria->getNome ();
+						$_SESSION [SESSION_USER] = $usuario->getNome ();
 						$_SESSION [SESSION_USER_ID] = $categoria->getIdUsuario();
 						$arquivos ["erro"] = 0;
 						$arquivos ["msg"] = "Usuário autenticado";

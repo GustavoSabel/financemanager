@@ -12,7 +12,7 @@ if (existeUsuarioLogado ()) {
 <head>
 <meta charset="utf-8">
 <title>Login</title>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="../Resources/jquery.min.js"></script>
 <script src="../Resources/TratadorErro.js"></script>
 <script src="../Resources/Login.js"></script>
 <link rel="stylesheet" href="../Resources/Estilos.css">

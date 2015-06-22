@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<?php include("componenteUsuarioLogado.php")?>
+<?php include("componenteUsuarioLogado.php") ?>
 <html>
 <head>
 <meta charset="utf-8">
 <title>Finance Manager</title>
 <link rel="stylesheet" href="../Resources/Estilos.css">
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="../Resources/jquery.min.js"></script>
 <script src="../Resources/TratadorErro.js"></script>
 <script src="../Resources/Login.js"></script>
 </head>
@@ -13,11 +13,11 @@
 	<header>
 		<div class="cabecalho">
 			<img class="logo"
-				src="http://www.fronteirasemfim.com.br/wp-content/uploads/2011/08/financisto.png" />
+				src="../Resources/Imagens/wallet.png" />
 			<h1>Finance Manager</h1>
 		</div>
 	</header>
-  	<?php include("componenteNavegacao.html")?>
+  	<?php include("componenteNavegacao.html") ?>
 	<section>
 		<div id="Valores">
 			<h2>Resumo do Mês</h2>
