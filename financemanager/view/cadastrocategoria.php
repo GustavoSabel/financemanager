@@ -22,22 +22,19 @@
 		<form method="post" action="">
 			<label class="formulario categoria" for="categoria">Categoria</label>
 			<input type="text" id="categoria" name="categoria" maxlength="150" />
-<<<<<<< .mine
 			<br> <input type="submit" id="submit" name="submit" value="Cadastrar" /> <input
 				type="reset" value="Limpar" /> <br> <input type="hidden"
 				name="operacao" value="salvar"> <br>
-=======
 			<br> 
 			<input type="submit" id="submit" name="cadastrar" value="Gravar" /> 
 			<input type="reset" value="Limpar" /> 
 			<br> 
 			<input type="hidden" name="operacao" value="salvar">
 			<input type="hidden" name="idCategoria" id="idCategoria"/>
->>>>>>> .r58
 		</form>
 		<div id="msg"></div>
 	</section>
-	<?php include("componenteTabelaCategorias.html")?>
+	<?php include("componenteTabelaCategorias.html") ?>
 	<footer>
 		<span> All Rights Reserved. </span>
 	</footer>
