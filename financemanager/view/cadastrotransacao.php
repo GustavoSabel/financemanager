@@ -32,8 +32,8 @@
 			<select name="idcategoria">
 			<?php
 				$categoriaDao = new CategoriaDaoImpl();
-				$categorias = $categoriaDao->listarTodos();
-				while ($categoria = geraArrayQuery($categorias)) {
+				$categoria = $categoriaDao->listarTodos();
+				while ($categoria = geraArrayQuery($categoria)) {
 					echo '<option value="'.$categoria[0].'">'.$categoria[1].'</option>';
 				}
 			?>

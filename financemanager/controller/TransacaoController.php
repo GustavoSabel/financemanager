@@ -54,9 +54,9 @@ function salvar($msgRetorno) {
 	} else if (trim ( $_REQUEST ["idpessoa"] ) == "") {
 		$msgRetorno ["msg"] = "Pessoa não informada.";
 		$msgRetorno ["erro"] = 5;
-	} else {
+	}/* else {
 
-    /*$numeroParcelas = 0;
+    $numeroParcelas = 0;
     for($i = 1; $i < 5; $i++) {
       if((isset($_REQUEST["valor".$i])) && (trim($_REQUEST["valor".$i]) != "")) {
         if (trim($_REQUEST["datavencimento".$i]) == "") {
