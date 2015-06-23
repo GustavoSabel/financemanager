@@ -64,9 +64,24 @@ function salvar($msgRetorno) {
 	} else if (trim ( $_REQUEST ["idusuario"] ) == "") {
 		$msgRetorno ["msg"] = "Usuário não autenticado.";
 		$msgRetorno ["erro"] = 6;
+	} else if (trim ( $_REQUEST ["numeroparcelas"] ) == "") {
+		$msgRetorno ["msg"] = "Não é possível efetuar transações sem parcelas.";
+		$msgRetorno ["erro"] = 7;		
 	} else {
 
-    	$numeroParcelas = 0;
+		if(!isset($_REQUEST["valor"])) {
+			$msgRetorno ["msg"] = "Não é possível efetuar transações sem parcelas.";
+			$msgRetorno ["erro"] = 7;
+		}
+		$vetorValor = $_REQUEST["valor"];
+		$numeroParcelas = $_REQUEST ["numeroparcelas"];
+		for($i = 1; $i < $numeroParcelas; $i++) {
+			
+		}
+
+
+
+    	/*$numeroParcelas = 0;
 	    for($i = 1; $i < 5; $i++) {
 	    	if((isset($_REQUEST["valor".$i])) && (trim($_REQUEST["valor".$i]) != "")) {
 	        	if (trim($_REQUEST["datavencimento".$i]) == "") {
@@ -81,10 +96,11 @@ function salvar($msgRetorno) {
 	      	}
 	    }
 
+
 	    if ($numeroParcelas == 0) {
-	    	$msgRetorno ["msg"] = "Não é possível efetuar transações sem parcela.";
+	    	$msgRetorno ["msg"] = "Não é possível efetuar transações sem parcelas.";
 	    	$msgRetorno ["erro"] = 9;
-	    }
+	    }*/
 
 	    $transacaoDao = new TransacaoDaoImpl();
 	    $idtransacao = $transacaoDao->getProximoId();

@@ -34,15 +34,13 @@ $(document).ready(function() {
 			return;
 		}
 
-		var valores = {
-			"tipo" : tipo,
-			"descricao" : descricao,
-			"idcategoria" : idcategoria,
-			"data" : data,
-			"idpessoa" : idpessoa,
-			"idusuario" : idusuario,
-			"operacao": "salvar"
-		};
+
+		/*var valorteste = "valor1";
+		var teste = {
+			valorteste : "10"
+		}; 
+
+		var valores = jsonConcat(transacao,teste);*/
 
 		var count = $("#count").val();
 		if((count == "") || (count ==0)) {
@@ -50,7 +48,11 @@ $(document).ready(function() {
 			return;
 		}
 
-		var numero = 0;
+		var vetorValor = [];
+		var vetorPago = [];
+		var vetorDataVencimento = [];
+		var vetorDataPagamento = [];
+		var numeroparcelas = 0;
 		for (i = 0; i <= count; i++) {
 			var valor = $("#valor"+i).val();
 			if(valor != "") {
@@ -69,8 +71,35 @@ $(document).ready(function() {
 					exibirMensagemErro("Data de pagamento não informada na parcela "+i+".");
 					return;
 				}
-				//Aqui deverão ser inseridos mais valores pra variável "valores".
+				vetorValor[numeroparcelas] = valor;
+				vetorPago[numeroparcelas] = pago;
+				vetorDataVencimento[numeroparcelas] = datavencimento;
+				vetorDataPagamento[numeroparcelas] = datapagamento;	
+				numeroparcelas++;
 			}
+		}
+
+		var transacao = {
+			"tipo" : tipo,
+			"descricao" : descricao,
+			"idcategoria" : idcategoria,
+			"data" : data,
+			"idpessoa" : idpessoa,
+			"idusuario" : idusuario,
+			"numeroparcelas" : numeroparcelas,
+			"operacao": "salvar"
+		};
+
+		if(numero > 0) {
+			var parcelas = {
+				"valor" : vetorValor,
+				"pago" : vetorPago,
+				"datavencimento" : vetorDataVencimento,
+				"datapagamento" : vetorDataPagamento	
+			}
+			var valores = jsonConcat(transacao,parcelas);
+		} else {
+			var valores = transacao;
 		}
 
 		exibirMensagemStatus("Cadastrando, aguarde...");
@@ -90,6 +119,13 @@ $(document).ready(function() {
 	});
 });
 
+
+function jsonConcat(o1, o2) {
+	for (var key in o2) {
+		o1[key] = o2[key];
+	}
+	return o1;
+}
 
 /*
 Script desenvolvido por: klonder
