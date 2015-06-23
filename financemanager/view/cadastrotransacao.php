@@ -22,31 +22,6 @@
 	<?php include("componenteNavegacao.html") ?>
 	<section>
 		<form method="post" action="">
-		<!--	<div class="formulario transacao">
-				<input type="radio" name="tipo" value="despesa" id="despesa" checked>
-				<label for="despesa">Despesa</label> <input type="radio" name="tipo"
-					value="receita" id="receita"> <label for="receita">Receita</label>
-			</div>
-
-			<label class="formulario transacao" for="categoria">Categoria</label>
-
-			<select id="categoria">
-			<?php
-				$categoriaDao = new CategoriaDaoImpl();
-				$categorias = $categoriaDao->listarTodos();
-				while ($categoria = geraArrayQuery($categorias)) {
-					echo '<option value="'.$categoria[0].'">'.$categoria[1].'</option>';
-				}
-			?>
-			</select> <br> <label class="formulario transacao" for="valorTotal">Valor
-				Total</label> <input type="text" id="valorTotal" name="valorTotal"
-				maxlength="10" /> <br> <label class="formulario transacao"
-				for="valorTotal">Numero de Parcelas</label> <input type="number"
-				min="1" max="99" id="login" name="login" /> <br> <label
-				class="formulario transacao" for="senha">Descrição</label> <input
-				type="text" id="senha" name="senha" maxlength="150" /> <br> <input
-				type="submit" name="submit" id="submit" value="Cadastrar" /> <input
-				type="reset" value="Limpar" /> <br>  -->
 			<div class="formulario transacao">
 				<input type="radio" name="tipo" value="1" id="tipo" checked> <label for="receita">Receita</label>
 				<input type="radio" name="tipo" value="2" id="tipo"> <label for="despesa">Despesa</label>
@@ -75,16 +50,13 @@
 				}
 			?>
 			</select> </br>
-
-			<input type="hidden" name="idusuario" id="idusuario" value=<?php echo '"'.$_SESSION[SESSION_USER].'"' ?> />
-
+			<input type="hidden" name="idusuario" id="idusuario" value=<?php echo '"'.$_SESSION[SESSION_USER_ID].'"' ?> />
 			</br>
 			<label class="formulario transacao" for="Parcelas">Parcelas</label> </br>
 			<label class="formulario transacao" for="pago">Pago?</label> 
 			<label class="formulario transacao" for="valor">Valor</label> 
 			<label class="formulario transacao" for="datavencimento">Data de vencimento</label> 
 			<label class="formulario transacao" for="datapagamento">Data de pagamento</label> </br>
-
 			<?php
 				for($i = 1; $i < 5; $i++) {
 					echo '<select name="pago'.$i.'">'.
@@ -96,7 +68,6 @@
 						 '<input type="date" name="datapagamento'.$i.'"/> </br>';
 				}
 			?>
-
 			<input type="submit" name="submit" id="submit" value="Cadastrar" /> 
 			<input type="reset" value="Limpar" /> <br>
 		</form>

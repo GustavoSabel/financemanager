@@ -50,10 +50,10 @@ function salvar($msgRetorno) {
 		$msgRetorno ["erro"] = 3;
 	} else if (trim ( $_REQUEST ["data"] ) == "") {
 		$msgRetorno ["msg"] = "Data não informada.";
-		$msgRetorno ["erro"] = 4
+		$msgRetorno ["erro"] = 4;
 	} else if (trim ( $_REQUEST ["idpessoa"] ) == "") {
 		$msgRetorno ["msg"] = "Pessoa não informada.";
-		$msgRetorno ["erro"] = 5
+		$msgRetorno ["erro"] = 5;
 	} else {
 
     /*$numeroParcelas = 0;

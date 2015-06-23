@@ -22,7 +22,7 @@ switch ($_SERVER ['REQUEST_METHOD']) {
 					if ($usuario->getSenha () == $_REQUEST ["password"]) {
 						session_start ();
 						$_SESSION [SESSION_USER] = $usuario->getNome ();
-						$_SESSION [SESSION_USER_ID] = $categoria->getIdUsuario();
+						$_SESSION [SESSION_USER_ID] = $usuario->getIdUsuario();
 						$arquivos ["erro"] = 0;
 						$arquivos ["msg"] = "Usuário autenticado";
 					} else {
