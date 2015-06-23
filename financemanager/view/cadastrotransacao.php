@@ -27,19 +27,23 @@
 				<input type="radio" name="tipo" value="2" id="tipo"> <label for="despesa">Despesa</label>
 			</div>
 			<label class="formulario transacao" for="descricao">Descrição</label> 
-			<input type="text" id="descricao" name="descricao" maxlength="150"/> </br>
+			<input type="text" id="descricao" name="descricao" maxlength="150"/> <br/>
 			<label class="formulario transacao" for="categoria">Categoria</label> 
 			<select name="idcategoria">
 			<?php
 				$categoriaDao = new CategoriaDaoImpl();
-				$categoria = $categoriaDao->listarTodos();
-				while ($categoria = geraArrayQuery($categoria)) {
+				
+// 				$categoria = $categoriaDao->listarTodos();
+// 				while ($categoria = geraArrayQuery($categoria)) {
+	
+				$result = $categoriaDao->listarTodos();
+				while ($categoria = $result->fetch_array()) {
 					echo '<option value="'.$categoria[0].'">'.$categoria[1].'</option>';
 				}
 			?>
-			</select> </br>
+			</select> <br/>
 			<label class="formulario transacao" for="data">Data</label> 
-			<input type="date" id="data" name="data"/> </br>
+			<input type="date" id="data" name="data"/> <br/>
 			<label class="formulario transacao" for="pessoa">Pessoa</label> 
 			<select name="idpessoa">
 			<?php
@@ -49,14 +53,14 @@
 					echo '<option value="'.$pessoa[0].'">'.$pessoa[1].'</option>';
 				}
 			?>
-			</select> </br>
+			</select> <br/>
 			<input type="hidden" name="idusuario" id="idusuario" value=<?php echo '"'.$_SESSION[SESSION_USER_ID].'"' ?> />
-			</br>
-			<label class="formulario transacao" for="Parcelas">Parcelas</label> </br>
+			<br/>
+			<label class="formulario transacao" for="Parcelas">Parcelas</label> <br/>
 			<label class="formulario transacao" for="pago">Pago?</label> 
 			<label class="formulario transacao" for="valor">Valor</label> 
 			<label class="formulario transacao" for="datavencimento">Data de vencimento</label> 
-			<label class="formulario transacao" for="datapagamento">Data de pagamento</label> </br>
+			<label class="formulario transacao" for="datapagamento">Data de pagamento</label> <br/>
 			<?php
 				for($i = 1; $i < 5; $i++) {
 					echo '<select name="pago'.$i.'">'.
