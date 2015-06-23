@@ -51,7 +51,7 @@
 				}
 			?>
 			</select> <br/>
-			<br/>
+			<!--<br/>
 			<label class="formulario transacao" for="Parcelas">Parcelas</label> <br/>
 			<label class="formulario transacao" for="pago">Pago?</label> 
 			<label class="formulario transacao" for="valor">Valor</label> 
@@ -67,7 +67,12 @@
 						 '<input type="date" name="datavencimento'.$i.'"/> '.
 						 '<input type="date" name="datapagamento'.$i.'"/> </br>';
 				}
-			?>
+			?> -->
+
+			<input type="button" value="Adicionar parcela" name="add_input" id="add_input" onClick="addInput();">  
+			<div id="camposTexto"></div>
+			<br><input type="hidden" name="count" id="count" value="">
+
 			<input type="submit" name="submit" id="submit" value="Cadastrar" /> 
 			<input type="reset" value="Limpar" /> <br>
 		</form>

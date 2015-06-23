@@ -2,6 +2,8 @@
 require_once ("funcoesController.php");
 require_once ("dao/impl/TransacaoDaoImpl.php");
 require_once ("../model/Transacao.php");
+require_once ("dao/impl/ParcelaDaoImpl.php");
+require_once ("../model/Parcela.php");
 header ( 'Content-type: application/json' );
 header ( 'Access-Control-Allow-Origin: *' );
 header ( 'Access-Control-Allow-Headers: X-Requested-With' );
@@ -64,50 +66,51 @@ function salvar($msgRetorno) {
 		$msgRetorno ["erro"] = 6;
 	} else {
 
-    /*$numeroParcelas = 0;
+    	$numeroParcelas = 0;
 	    for($i = 1; $i < 5; $i++) {
-	      if((isset($_REQUEST["valor".$i])) && (trim($_REQUEST["valor".$i]) != "")) {
-	        if (trim($_REQUEST["datavencimento".$i]) == "") {
-	          $msgRetorno ["msg"] = "Data de vencimento não informada.";
-			  $msgRetorno ["erro"] = 7;
-	        }
-	        if (trim($_REQUEST["datapagamento".$i]) == "") {
-	          $msgRetorno ["msg"] = "Data de pagamento não informada.";
-			  $msgRetorno ["erro"] = 8;
-	        }
-	        $numeroParcelas++;
-	      }*/
+	    	if((isset($_REQUEST["valor".$i])) && (trim($_REQUEST["valor".$i]) != "")) {
+	        	if (trim($_REQUEST["datavencimento".$i]) == "") {
+	          		$msgRetorno ["msg"] = "Data de vencimento não informada.";
+			  		$msgRetorno ["erro"] = 7;
+	        	}
+	        	if (trim($_REQUEST["datapagamento".$i]) == "") {
+	          		$msgRetorno ["msg"] = "Data de pagamento não informada.";
+			  		$msgRetorno ["erro"] = 8;
+	        	}
+	        	$numeroParcelas++;
+	      	}
+	    }
 
-	    /*if ($numeroParcelas == 0) {
-	      $msgRetorno ["msg"] = "Não é possível efetuar transações sem parcela.";
-	      $msgRetorno ["erro"] = 9;
-	    }*/
+	    if ($numeroParcelas == 0) {
+	    	$msgRetorno ["msg"] = "Não é possível efetuar transações sem parcela.";
+	    	$msgRetorno ["erro"] = 9;
+	    }
 
 	    $transacaoDao = new TransacaoDaoImpl();
 	    $idtransacao = $transacaoDao->getProximoId();
 	    $transacao = new Transacao($idtransacao, $_REQUEST["descricao"], $_REQUEST["tipo"], $_REQUEST["data"], $_REQUEST["idusuario"], $_REQUEST["idpessoa"], $_REQUEST["idcategoria"]);
 	    try {
-	      $transacaoDao->salvar($transacao);
+	    	$transacaoDao->salvar($transacao);
 	    } catch (Exception $e) {
-	      $msgRetorno ["msg"] =  "Erro ao salvar transação: ".$e->getMessage();
-		  $msgRetorno ["erro"] = 10;
+	    	$msgRetorno ["msg"] =  "Erro ao salvar transação: ".$e->getMessage();
+			$msgRetorno ["erro"] = 10;
 	    } 
 
 
-	    /*$parcelaDao = new ParcelaDaoImpl();
+	    $parcelaDao = new ParcelaDaoImpl();
 	    for($i = 1; $i < 5; $i++) {
-	      if((isset($_POST["valor".$i])) && (trim($_POST["valor".$i]) != "")) {
-	        $parcela = new Parcela(0, $_POST["valor".$i], $_POST["datapagamento".$i], $_POST["datavencimento".$i], $_POST["pago".$i], $idtransacao);
-	        try {
-	          $parcelaDao->salvar($parcela);
-	        } catch (Exception $e) {
-	          $msgRetorno ["msg"] =  "Erro ao salvar parcelas: ".$e->getMessage();
-			  $msgRetorno ["erro"] = 11;
-	        }
-	      }
-	    }*/
-	return $msgRetorno;
+	    	if((isset($_POST["valor".$i])) && (trim($_POST["valor".$i]) != "")) {
+	    		$parcela = new Parcela(0, $_POST["valor".$i], $_POST["datapagamento".$i], $_POST["datavencimento".$i], $_POST["pago".$i], $idtransacao);
+	        	try {
+	          		$parcelaDao->salvar($parcela);
+	        	} catch (Exception $e) {
+	          		$msgRetorno ["msg"] =  "Erro ao salvar parcelas: ".$e->getMessage();
+			  		$msgRetorno ["erro"] = 11;
+	        	}
+	      	}
+	    }
     }
+	return $msgRetorno;
 }
 
 ?>
