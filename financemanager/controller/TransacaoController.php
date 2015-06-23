@@ -39,7 +39,12 @@ function salvar($msgRetorno) {
 			"erro" => 0,
 			"msg" => "Salva com sucesso." 
 	);
-	if (trim ( $_REQUEST ["tipo"] ) == "") {
+
+
+	$msgRetorno ["msg"] = "Paranauê.";
+	$msgRetorno ["erro"] = 9;
+
+/*	if (trim ( $_REQUEST ["tipo"] ) == "") {
 		$msgRetorno ["msg"] = "Tipo não informado.";
 		$msgRetorno ["erro"] = 1;
 	} else if (trim ( $_REQUEST ["descricao"] ) == "") {
@@ -54,53 +59,53 @@ function salvar($msgRetorno) {
 	} else if (trim ( $_REQUEST ["idpessoa"] ) == "") {
 		$msgRetorno ["msg"] = "Pessoa não informada.";
 		$msgRetorno ["erro"] = 5;
-	}/* else {
+	} else {*/ //aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 
-    $numeroParcelas = 0;
-    for($i = 1; $i < 5; $i++) {
-      if((isset($_REQUEST["valor".$i])) && (trim($_REQUEST["valor".$i]) != "")) {
-        if (trim($_REQUEST["datavencimento".$i]) == "") {
-          $msgRetorno ["msg"] = "Data de vencimento não informada.";
-		  $msgRetorno ["erro"] = 6;
-        }
-        if (trim($_REQUEST["datapagamento".$i]) == "") {
-          $msgRetorno ["msg"] = "Data de pagamento não informada.";
-		  $msgRetorno ["erro"] = 7;
-        }
-        $numeroParcelas++;
-      }
-    }*/
+    /*$numeroParcelas = 0;
+	    for($i = 1; $i < 5; $i++) {
+	      if((isset($_REQUEST["valor".$i])) && (trim($_REQUEST["valor".$i]) != "")) {
+	        if (trim($_REQUEST["datavencimento".$i]) == "") {
+	          $msgRetorno ["msg"] = "Data de vencimento não informada.";
+			  $msgRetorno ["erro"] = 6;
+	        }
+	        if (trim($_REQUEST["datapagamento".$i]) == "") {
+	          $msgRetorno ["msg"] = "Data de pagamento não informada.";
+			  $msgRetorno ["erro"] = 7;
+	        }
+	        $numeroParcelas++;
+	      }*/
 
-    /*if ($numeroParcelas == 0) {
-      $msgRetorno ["msg"] = "Não é possível efetuar transações sem parcela.";
-      $msgRetorno ["erro"] = 8;
-    }*/
+	    /*if ($numeroParcelas == 0) {
+	      $msgRetorno ["msg"] = "Não é possível efetuar transações sem parcela.";
+	      $msgRetorno ["erro"] = 8;
+	    }*/
 
-    $transacaoDao = new TransacaoDaoImpl();
-    $idtransacao = $transacaoDao->getProximoId();
-    $transacao = new Transacao($idtransacao, $_REQUEST["descricao"], $_REQUEST["tipo"], $_REQUEST["data"], $_REQUEST["idusuario"], $_REQUEST["idpessoa"], $_REQUEST["idcategoria"]);
-    try {
-      $transacaoDao->salvar($transacao);
-    } catch (Exception $e) {
-      $msgRetorno ["msg"] =  "Erro ao salvar transação: ".$e->getMessage();
-	  $msgRetorno ["erro"] = 8;
-    } 
+/*	    $transacaoDao = new TransacaoDaoImpl();
+	    $idtransacao = $transacaoDao->getProximoId();
+	    $transacao = new Transacao($idtransacao, $_REQUEST["descricao"], $_REQUEST["tipo"], $_REQUEST["data"], $_REQUEST["idusuario"], $_REQUEST["idpessoa"], $_REQUEST["idcategoria"]);
+	    try {
+	      $transacaoDao->salvar($transacao);
+	    } catch (Exception $e) {
+	      $msgRetorno ["msg"] =  "Erro ao salvar transação: ".$e->getMessage();
+		  $msgRetorno ["erro"] = 8;
+	    } */ //aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 
 
-    /*$parcelaDao = new ParcelaDaoImpl();
-    for($i = 1; $i < 5; $i++) {
-      if((isset($_POST["valor".$i])) && (trim($_POST["valor".$i]) != "")) {
-        $parcela = new Parcela(0, $_POST["valor".$i], $_POST["datapagamento".$i], $_POST["datavencimento".$i], $_POST["pago".$i], $idtransacao);
-        try {
-          $parcelaDao->salvar($parcela);
-        } catch (Exception $e) {
-          $msgRetorno ["msg"] =  "Erro ao salvar parcelas: ".$e->getMessage();
-		  $msgRetorno ["erro"] = 9;
-        }
-      }
-    }*/
+	    /*$parcelaDao = new ParcelaDaoImpl();
+	    for($i = 1; $i < 5; $i++) {
+	      if((isset($_POST["valor".$i])) && (trim($_POST["valor".$i]) != "")) {
+	        $parcela = new Parcela(0, $_POST["valor".$i], $_POST["datapagamento".$i], $_POST["datavencimento".$i], $_POST["pago".$i], $idtransacao);
+	        try {
+	          $parcelaDao->salvar($parcela);
+	        } catch (Exception $e) {
+	          $msgRetorno ["msg"] =  "Erro ao salvar parcelas: ".$e->getMessage();
+			  $msgRetorno ["erro"] = 9;
+	        }
+	      }
+	    }*/
 	return $msgRetorno;
-}
+    }
+//}
 
 $jsonFormat = json_encode ( $msgRetorno );
 print ($jsonFormat) ;
