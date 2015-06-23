@@ -15,7 +15,7 @@ switch ($_SERVER ['REQUEST_METHOD']) {
 	case 'POST' :
 		switch ($_POST ["operacao"]) {
 			case 'salvar' :
-				$msgRetorno = salvar ();
+				$msgRetorno = salvar($msgRetorno);
 				break;
 		}
 		break;
@@ -34,17 +34,17 @@ switch ($_SERVER ['REQUEST_METHOD']) {
 		$msgRetorno ["msg"] = "GET Ainda não implementado";
 		break;*/
 }
+
+$jsonFormat = json_encode ( $msgRetorno );
+print ($jsonFormat) ;
+
 function salvar($msgRetorno) {
 	$msgRetorno = array (
 			"erro" => 0,
 			"msg" => "Salva com sucesso." 
 	);
 
-
-	$msgRetorno ["msg"] = "Paranauê.";
-	$msgRetorno ["erro"] = 9;
-
-/*	if (trim ( $_REQUEST ["tipo"] ) == "") {
+	if (trim ( $_REQUEST ["tipo"] ) == "") {
 		$msgRetorno ["msg"] = "Tipo não informado.";
 		$msgRetorno ["erro"] = 1;
 	} else if (trim ( $_REQUEST ["descricao"] ) == "") {
@@ -59,36 +59,39 @@ function salvar($msgRetorno) {
 	} else if (trim ( $_REQUEST ["idpessoa"] ) == "") {
 		$msgRetorno ["msg"] = "Pessoa não informada.";
 		$msgRetorno ["erro"] = 5;
-	} else {*/ //aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+	} else if (trim ( $_REQUEST ["idusuario"] ) == "") {
+		$msgRetorno ["msg"] = "Usuário não autenticado.";
+		$msgRetorno ["erro"] = 6;
+	} else {
 
     /*$numeroParcelas = 0;
 	    for($i = 1; $i < 5; $i++) {
 	      if((isset($_REQUEST["valor".$i])) && (trim($_REQUEST["valor".$i]) != "")) {
 	        if (trim($_REQUEST["datavencimento".$i]) == "") {
 	          $msgRetorno ["msg"] = "Data de vencimento não informada.";
-			  $msgRetorno ["erro"] = 6;
+			  $msgRetorno ["erro"] = 7;
 	        }
 	        if (trim($_REQUEST["datapagamento".$i]) == "") {
 	          $msgRetorno ["msg"] = "Data de pagamento não informada.";
-			  $msgRetorno ["erro"] = 7;
+			  $msgRetorno ["erro"] = 8;
 	        }
 	        $numeroParcelas++;
 	      }*/
 
 	    /*if ($numeroParcelas == 0) {
 	      $msgRetorno ["msg"] = "Não é possível efetuar transações sem parcela.";
-	      $msgRetorno ["erro"] = 8;
+	      $msgRetorno ["erro"] = 9;
 	    }*/
 
-/*	    $transacaoDao = new TransacaoDaoImpl();
+	    $transacaoDao = new TransacaoDaoImpl();
 	    $idtransacao = $transacaoDao->getProximoId();
 	    $transacao = new Transacao($idtransacao, $_REQUEST["descricao"], $_REQUEST["tipo"], $_REQUEST["data"], $_REQUEST["idusuario"], $_REQUEST["idpessoa"], $_REQUEST["idcategoria"]);
 	    try {
 	      $transacaoDao->salvar($transacao);
 	    } catch (Exception $e) {
 	      $msgRetorno ["msg"] =  "Erro ao salvar transação: ".$e->getMessage();
-		  $msgRetorno ["erro"] = 8;
-	    } */ //aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+		  $msgRetorno ["erro"] = 10;
+	    } 
 
 
 	    /*$parcelaDao = new ParcelaDaoImpl();
@@ -99,16 +102,13 @@ function salvar($msgRetorno) {
 	          $parcelaDao->salvar($parcela);
 	        } catch (Exception $e) {
 	          $msgRetorno ["msg"] =  "Erro ao salvar parcelas: ".$e->getMessage();
-			  $msgRetorno ["erro"] = 9;
+			  $msgRetorno ["erro"] = 11;
 	        }
 	      }
 	    }*/
 	return $msgRetorno;
     }
-//}
-
-$jsonFormat = json_encode ( $msgRetorno );
-print ($jsonFormat) ;
+}
 
 ?>
 

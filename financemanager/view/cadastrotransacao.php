@@ -29,23 +29,20 @@
 			<label class="formulario transacao" for="descricao">Descrição</label> 
 			<input type="text" id="descricao" name="descricao" maxlength="150"/> <br/>
 			<label class="formulario transacao" for="categoria">Categoria</label> 
-			<select name="idcategoria">
+			<select id="idcategoria" name="idcategoria" >
 			<?php
 				$categoriaDao = new CategoriaDaoImpl();
-				
-// 				$categoria = $categoriaDao->listarTodos();
-// 				while ($categoria = geraArrayQuery($categoria)) {
-	
 				$result = $categoriaDao->listarTodos();
 				while ($categoria = $result->fetch_array()) {
 					echo '<option value="'.$categoria[0].'">'.$categoria[1].'</option>';
 				}
 			?>
 			</select> <br/>
+			<input type="hidden" id="idusuario" name="idusuario" value=<?php echo '"'.$_SESSION[SESSION_USER_ID].'"' ?>/>
 			<label class="formulario transacao" for="data">Data</label> 
 			<input type="date" id="data" name="data"/> <br/>
 			<label class="formulario transacao" for="pessoa">Pessoa</label> 
-			<select name="idpessoa">
+			<select id="idpessoa" name="idpessoa" >
 			<?php
 				$pessoaDao = new PessoaDaoImpl();
 				$pessoas = $pessoaDao->listarTodos();
@@ -54,7 +51,6 @@
 				}
 			?>
 			</select> <br/>
-			<input type="hidden" name="idusuario" id="idusuario" value=<?php echo '"'.$_SESSION[SESSION_USER_ID].'"' ?> />
 			<br/>
 			<label class="formulario transacao" for="Parcelas">Parcelas</label> <br/>
 			<label class="formulario transacao" for="pago">Pago?</label> 

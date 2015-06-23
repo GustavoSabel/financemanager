@@ -7,6 +7,7 @@ $(document).ready(function() {
 		var idcategoria = $("#idcategoria").val();
 		var data = $("#data").val();
 		var idpessoa = $("#idpessoa").val();
+		var idusuario = $("#idusuario").val();
 
 		if(tipo == ""){
 			exibirMensagemErro("Tipo não informado.");
@@ -28,6 +29,10 @@ $(document).ready(function() {
 			exibirMensagemErro("Pessoa não informada.");
 			return;
 		}
+		if(idusuario == ""){
+			exibirMensagemErro("Usuário não autenticado.");
+			return;
+		}
 
 
 		var valores = {
@@ -36,6 +41,7 @@ $(document).ready(function() {
 			"idcategoria" : idcategoria,
 			"data" : data,
 			"idpessoa" : idpessoa,
+			"idusuario" : idusuario,
 			"operacao": "salvar"
 		};
 
