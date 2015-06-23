@@ -22,13 +22,10 @@
 		<form method="post" action="">
 			<label class="formulario categoria" for="categoria">Categoria</label>
 			<input type="text" id="categoria" name="categoria" maxlength="150" />
-			<br> <input type="submit" id="submit" name="submit" value="Cadastrar" /> <input
-				type="reset" value="Limpar" /> <br> <input type="hidden"
-				name="operacao" value="salvar"> <br>
-			<br> 
-			<input type="submit" id="submit" name="cadastrar" value="Gravar" /> 
+			<br/> 
+			<input type="submit" id="submit" name="submit" value="Cadastrar" /> 
 			<input type="reset" value="Limpar" /> 
-			<br> 
+			<br/> 
 			<input type="hidden" name="operacao" value="salvar">
 			<input type="hidden" name="idCategoria" id="idCategoria"/>
 		</form>
