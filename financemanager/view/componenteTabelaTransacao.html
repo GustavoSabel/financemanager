@@ -1,0 +1,171 @@
+<script>
+var transacoes;
+var parcelas;
+$(document).ready(function(){
+	transacoes = null;
+	$.ajax({
+		type : "get",
+		url : "../controller/TransacaoController.php?operacao=listar",
+		dataType : "json",
+		success : function(result) {
+			console.log(result);
+			transacoes = result;
+
+			parcelas = null;
+			$.ajax({
+				type : "get",
+				url : "../controller/TransacaoController.php?operacao=listarparcelas",
+				dataType : "json",
+				success : function(resultado) {
+					console.log(resultado);
+					parcelas = resultado;
+					gerarTabela(transacoes,parcelas);
+				},
+				error : function(resultado, txt) {
+					console.log(resultado);
+					exibirMensagem(-1, txt);
+				}
+			});
+		},
+		error : function(result, txt) {
+			console.log(result);
+			exibirMensagem(-1, txt);
+		}
+	});
+});
+
+function gerarTabela(transacoes,parcelas) {
+	$('#transacoes tbody').html("");
+	for (var i = 0; i < transacoes.length; i++) {
+		if(transacoes[i].tipo == 1) {
+			var tipo = "Receita";
+		} else {
+			var tipo = "Despesa";
+		}
+		addLinha(transacoes[i].idtransacao, 
+			     transacoes[i].descricao,
+			     tipo,
+			     transacoes[i].categoria,
+			     transacoes[i].data.substring(8,10)+"/"+transacoes[i].data.substring(5,7)+"/"+transacoes[i].data.substring(0,4),
+			     transacoes[i].pessoa, false);
+		gerarTabelaParcela(parcelas,transacoes[i].idtransacao)
+	}	
+}
+
+function gerarTabelaParcela(parcelas,idTransacao) {
+	var numeroDaParcela = 0;
+	for (var i = 0; i < parcelas.length; i++) {
+		if(parcelas[i].idtransacao == idTransacao) {
+			numeroDaParcela++;
+			if(parcelas[i].pago == 1) {
+				var pago = "Sim";
+			} else {
+				var pago = "Não";
+			}
+			addLinhaParcela(numeroDaParcela,
+							parcelas[i].idparcela,
+							pago, 
+						    parcelas[i].valor,
+						    parcelas[i].datavencimento,
+						    parcelas[i].datapagamento, false);
+		}
+	}
+}
+
+function getTransacao(idTransacao) {
+	for (var i = 0; i < transacoes.length; i++) {
+		if(transacoes[i].idTransacao == idTransacao){
+			return transacoes[i];
+		}
+	}
+}
+
+function excluirTransacaoTabela(idTransacao) {
+	for (var i = 0; i < transacoes.length; i++) {
+		if(transacoes[i].idtransacao == idTransacao){
+			transacoes.splice(i, 1);
+			break;
+		}
+	}
+	
+	$("tr#transacao-" + idTransacao).hide("slow", function(){
+		this.remove();
+	});
+}
+
+function alterarTransacaoTabela(id, descricao) {
+	for (var i = 0; i < transacoes.length; i++) {
+		if(transacoes[i].idTransacao == id){
+			transacoes[i].descricao = descricao;
+			break;
+		}
+	}
+
+	//Gera a tabela toda pra que a transação editada fique no mesmo lugar
+	gerarTabela();
+}
+
+function inserirTransacaoTabela(idTransacao, nomeTransacao){
+	transacoes.push({"idtransacao":idTransacao, "descricao":nomeTransacao});
+	addLinha(idTransacao, nomeTransacao, true);
+}
+
+function addLinha(idTransacao, nomeTransacao, tipoTransacao, categoriaTransacao, dataTransacao, pessoaTransacao, top){
+	var linhas =
+	    " <tr id='transacao-" + idTransacao + "'>" +
+		" <th>"+ nomeTransacao +"</th>"+
+		" <th>"+ tipoTransacao +"</th>"+
+		" <th>"+ categoriaTransacao +"</th>"+
+		" <th>"+ dataTransacao +"</th>"+
+		" <th>"+ pessoaTransacao +"</th>"+
+		" <th width='16px'>"+
+			" <a href='#' onClick='deletar(" + idTransacao + ")'> " +
+			" <img class='link_delete' src='../Resources/Imagens/delete.png' /></a>" +
+		" </th>"+
+		" </tr>";
+		if(top){
+			$('#transacoes tbody').html(linhas + $('#transacoes tbody').html());
+		} else {
+			$('#transacoes tbody').append(linhas);
+		}
+}
+
+function addLinhaParcela(numeroDaParcela, idparcela, pago, valor, datavencimento, datapagamento, top){
+	var linhas = "";
+	if(numeroDaParcela == 1) {
+		linhas = "<tr>"+
+					"<td>Pago?</td>"+
+					"<td>Valor</td>"+
+					"<td>Data de vencimento</td>"+
+					"<td>Data de pagamento</td>"+
+				  "</tr>";
+	}
+	linhas = linhas +
+	    " <tr id='idparcela-" + idparcela + "'>" +
+		" <td>"+ pago +"</td>"+
+		" <td>"+ valor +"</td>"+
+		" <td>"+ datavencimento +"</td>"+
+		" <td>"+ datapagamento +"</td>"+
+		" </tr>";
+		if(top){
+			$('#transacoes tbody').html(linhas + $('#transacoes tbody').html());
+		} else {
+			$('#transacoes tbody').append(linhas);
+		}
+}
+</script>
+<table id="transacoes">
+	<thead>
+		<tr>
+			<th>Descrição</th>
+			<th>Tipo</th>
+			<th>Categoria</th>
+			<th>Data</th>
+			<th>Pessoa</th>
+			<th>Excluir</th>
+		</tr>
+	</thead>
+	<tbody>
+	</tbody>
+</table>
+

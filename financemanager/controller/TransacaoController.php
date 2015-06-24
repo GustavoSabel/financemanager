@@ -105,8 +105,15 @@ function excluir($idTransacao) {
 function listarTransacoes() {
 	$daoTr = new TransacaoDaoImpl();
 	session_start ();
-	$transacoes = $daoTr->listarTodosDoUsuario($_SESSION [SESSION_USER_ID]); ////////// PEGAR DA SESSÃO
+	$transacoes = $daoTr->listarTodosDoUsuario($_SESSION [SESSION_USER_ID]);
 	return $transacoes;
+}
+
+function listarParcelas() {
+	$daoPr = new ParcelaDaoImpl();
+	session_start ();
+	$parcelas = $daoPr->listarTodos();
+	return $parcelas;
 }
 
 //defineHeaderRetornoJson();
@@ -114,10 +121,16 @@ function listarTransacoes() {
 
 switch ($_SERVER ['REQUEST_METHOD']) {
 	case 'GET' :
-		// Por padrão retorna todas as transações
-		$mysqliResult = listarTransacoes();
-		//$arquivos = $mysqliResult->fetch_all ( MYSQLI_ASSOC );
-		$msgRetorno = $mysqliResult->fetch_all ( MYSQLI_ASSOC );
+		switch ($_GET ["operacao"]) {
+			case 'listar' :
+				$mysqliResult = listarTransacoes();
+				$msgRetorno = $mysqliResult->fetch_all ( MYSQLI_ASSOC );
+				break;
+			case 'listarparcelas' :
+				$mysqliResult = listarParcelas();
+				$msgRetorno = $mysqliResult->fetch_all ( MYSQLI_ASSOC );
+				break;
+		}
 		break;
 	case 'POST' :
 		//defineHeaderRetornoJson();

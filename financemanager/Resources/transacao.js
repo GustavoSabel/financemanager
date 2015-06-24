@@ -47,14 +47,6 @@ $(document).ready(function() {
 			return;
 		}
 
-
-		/*var valorteste = "valor1";
-		var teste = {
-			valorteste : "10"
-		}; 
-
-		var valores = jsonConcat(transacao,teste);*/
-
 		var count = $("#count").val();
 		if((count == "") || (count ==0)) {
 			exibirMensagemErro("Não é possível efetuar transações sem parcela.");
@@ -147,13 +139,11 @@ function deletar(idTransacao) {
 		dataType : "json",
 		data : dados,
 		success : function(result) {
-			//exibirMensagem(result.erro, result.msg);
 			exibirMensagemPadrao(result);
 			excluirTransacaoTabela(idTransacao);	
 		},
 		error : function(result, txt) {
 			console.log(result);
-			//exibirMensagem(-1, txt);
 			exibirMensagemPadrao(result);
 		}
 	});	
@@ -173,12 +163,6 @@ var iCamposTotal = 10;
 
 function addInput() {   
 if (iCampos <= iCamposTotal) {
- 	//hidden1 = document.getElementById("hidden1");
- 	
-	//Criando uma variável que armazenará as informações da linha que será criada.
-	//Os campos estão sendo colocados no interior de uma div, pois a linha contém muitos elementos;
-	//Basta excluir a div, para excluir todos os elementos da linha;
-	//var texto = "<div id='linha"+iCount+"'><input type='text' name='texto"+iCount+"' id='texto"+iCount+"' value='Meu texto "+iCount+"'><input type='button' value='Apagar campo' onClick='removeInput(\"linha"+iCount+"\")'></div>";	  
   	var texto = "";
   	if (iCount == 0) {
   		texto = texto + "<div class='formulario' id='linha"+(iCount-1)+"'>"+
@@ -198,7 +182,6 @@ if (iCampos <= iCamposTotal) {
 					"<input type='date' id='datapagamento"+iCount+"' name='datapagamento"+iCount+"'/> "+
 					"<input type='button' value='Apagar' onClick='removeInput(\"linha"+iCount+"\")'>"+
 				"</div>";
-	//Capturando a div principal, na qual os novos divs serão inseridos:
 	var parcelas = document.getElementById('parcelas');   
 	parcelas.innerHTML = parcelas.innerHTML+texto;
   
