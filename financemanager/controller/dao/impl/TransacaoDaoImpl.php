@@ -25,7 +25,6 @@ require_once("../model/Pessoa.php");
     }
     
     public function buscar($identificador) {
-    
       $result = geraQuery("select ".Transacao::$CAMPO_IDTRANSACAO.", ".Transacao::$CAMPO_DESCRICAO.", ".Transacao::$CAMPO_TIPO.", ".Transacao::$CAMPO_DATA.", ".Transacao::$CAMPO_IDUSUARIO.", ".Transacao::$CAMPO_IDPESSOA.", ".Transacao::$CAMPO_IDCATEGORIA.
                           " from ".Transacao::$TABELA." where ".Transacao::$CAMPO_IDTRANSACAO." = '".$identificador."'");
       if (geraNumeroLinhas($result) > 0) {
@@ -64,6 +63,46 @@ require_once("../model/Pessoa.php");
     
     public function editar($info) {
       throw new Exception("Função editar não implementada.");
+    }
+
+    public function buscarReceitas() {
+      $result = geraQuery("select sum(p.valor) from parcela p, transacao t where p.idtransacao = t.idtransacao and t.tipo = 1 and t.idusuario = ".$_SESSION [SESSION_USER_ID]);
+      if (geraNumeroLinhas($result) > 0) {
+          if ($transacoes = geraArrayQuery($result)) {
+            return $transacoes[0];
+          }
+      }
+      return 0;
+    }
+
+    public function buscarReceitasNaoPagas() {
+      $result = geraQuery("select sum(p.valor) from parcela p, transacao t where p.idtransacao = t.idtransacao and t.tipo = 1 and p.pago = 0 and t.idusuario = ".$_SESSION [SESSION_USER_ID]);
+      if (geraNumeroLinhas($result) > 0) {
+          if ($transacoes = geraArrayQuery($result)) {
+            return $transacoes[0];
+          }
+      }
+      return 0;
+    }
+
+    public function buscarDespesas() {
+      $result = geraQuery("select sum(p.valor) from parcela p, transacao t where p.idtransacao = t.idtransacao and t.tipo = 2 and t.idusuario = ".$_SESSION [SESSION_USER_ID]);
+      if (geraNumeroLinhas($result) > 0) {
+          if ($transacoes = geraArrayQuery($result)) {
+            return $transacoes[0];
+          }
+      }
+      return 0;
+    }
+
+    public function buscarDespesasNaoPagas() {
+      $result = geraQuery("select sum(p.valor) from parcela p, transacao t where p.idtransacao = t.idtransacao and t.tipo = 2 and p.pago = 0  and t.idusuario = ".$_SESSION [SESSION_USER_ID]);
+      if (geraNumeroLinhas($result) > 0) {
+          if ($transacoes = geraArrayQuery($result)) {
+            return $transacoes[0];
+          }
+      }
+      return 0;
     }
 
     public function getProximoId() {

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <?php include("componenteUsuarioLogado.php") ?>
+<?php require_once("../controller/dao/impl/TransacaoDaoImpl.php"); ?>
 <html>
 <head>
 <meta charset="utf-8">
@@ -20,16 +21,19 @@
   	<?php include("componenteNavegacao.html") ?>
 	<section>
 		<div id="Valores">
-			<h2>Resumo do Mês</h2>
-			<span>Saldo atual: R$0,00</span><br> <span>Receitas: R$0,00</span><br>
-			<span>Despesas: R$0,00</span>
-		</div>
-		<div id="Pendencias">
-			<h2>Pendências</h2>
-			<ul>
-				<li>Pagar João</li>
-				<li>Receber de Tiago</li>
-			</ul>
+			<h2>Resumo</h2>
+			<?php
+				$transacaoDao = new TransacaoDaoImpl();
+				$receitas = $transacaoDao->buscarReceitas();
+				$despesas = $transacaoDao->buscarDespesas();
+				$receitasNaoPagas = $transacaoDao->buscarReceitasNaoPagas();
+				$despesasNaoPagas = $transacaoDao->buscarDespesasNaoPagas();
+				echo "<span>Saldo atual: R$".number_format(($receitas-$despesas),2,",",".")."</span><br>";
+				echo "<span>Receitas: R$".number_format($receitas,2,",",".")."</span><br>";
+				echo "<span>Despesas: R$".number_format($despesas,2,",",".")."</span><br><br>";
+				echo "<span>Me devem: R$".number_format($receitasNaoPagas,2,",",".")."</span><br>";
+				echo "<span>Devo: R$".number_format($despesasNaoPagas,2,",",".")."</span><br>";
+			?>
 		</div>
 		<div id="msg"></div>
 	</section>
