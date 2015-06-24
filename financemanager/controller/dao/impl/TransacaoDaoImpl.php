@@ -3,6 +3,7 @@ require_once("../controller/dao/DAO.php");
 require_once("../controller/dao/util/ConnectionMySql.php");
 require_once("../model/Transacao.php");
 require_once ("../controller/dao/impl/ParcelaDaoImpl.php");
+require_once("../model/Parcela.php");
 require_once("../model/Categoria.php");
 require_once("../model/Pessoa.php");
 
@@ -66,7 +67,11 @@ require_once("../model/Pessoa.php");
     }
 
     public function buscarReceitas() {
-      $result = geraQuery("select sum(p.valor) from parcela p, transacao t where p.idtransacao = t.idtransacao and t.tipo = 1 and t.idusuario = ".$_SESSION [SESSION_USER_ID]);
+      $result = geraQuery("select sum(p.".Parcela::$CAMPO_VALOR.")".
+                          " from ".Parcela::$TABELA." p, ".Transacao::$TABELA." t".
+                          " where p.".Parcela::$CAMPO_IDTRANSACAO." = t.".Transacao::$CAMPO_IDTRANSACAO.
+                          " and t.".Transacao::$CAMPO_TIPO." = 1".
+                          " and t.".Transacao::$CAMPO_IDUSUARIO." = ".$_SESSION[SESSION_USER_ID]);
       if (geraNumeroLinhas($result) > 0) {
           if ($transacoes = geraArrayQuery($result)) {
             return $transacoes[0];
@@ -76,7 +81,12 @@ require_once("../model/Pessoa.php");
     }
 
     public function buscarReceitasNaoPagas() {
-      $result = geraQuery("select sum(p.valor) from parcela p, transacao t where p.idtransacao = t.idtransacao and t.tipo = 1 and p.pago = 0 and t.idusuario = ".$_SESSION [SESSION_USER_ID]);
+      $result = geraQuery("select sum(p.".Parcela::$CAMPO_VALOR.")".
+                          " from ".Parcela::$TABELA." p, ".Transacao::$TABELA." t".
+                          " where p.".Parcela::$CAMPO_IDTRANSACAO." = t.".Transacao::$CAMPO_IDTRANSACAO.
+                          " and t.".Transacao::$CAMPO_TIPO." = 1".
+                          " and p.".Parcela::$CAMPO_PAGO." = 0".
+                          " and t.".Transacao::$CAMPO_IDUSUARIO." = ".$_SESSION[SESSION_USER_ID]);
       if (geraNumeroLinhas($result) > 0) {
           if ($transacoes = geraArrayQuery($result)) {
             return $transacoes[0];
@@ -86,7 +96,11 @@ require_once("../model/Pessoa.php");
     }
 
     public function buscarDespesas() {
-      $result = geraQuery("select sum(p.valor) from parcela p, transacao t where p.idtransacao = t.idtransacao and t.tipo = 2 and t.idusuario = ".$_SESSION [SESSION_USER_ID]);
+      $result = geraQuery("select sum(p.".Parcela::$CAMPO_VALOR.")".
+                          " from ".Parcela::$TABELA." p, ".Transacao::$TABELA." t".
+                          " where p.".Parcela::$CAMPO_IDTRANSACAO." = t.".Transacao::$CAMPO_IDTRANSACAO.
+                          " and t.".Transacao::$CAMPO_TIPO." = 2".
+                          " and t.".Transacao::$CAMPO_IDUSUARIO." = ".$_SESSION[SESSION_USER_ID]);
       if (geraNumeroLinhas($result) > 0) {
           if ($transacoes = geraArrayQuery($result)) {
             return $transacoes[0];
@@ -96,7 +110,12 @@ require_once("../model/Pessoa.php");
     }
 
     public function buscarDespesasNaoPagas() {
-      $result = geraQuery("select sum(p.valor) from parcela p, transacao t where p.idtransacao = t.idtransacao and t.tipo = 2 and p.pago = 0  and t.idusuario = ".$_SESSION [SESSION_USER_ID]);
+      $result = geraQuery("select sum(p.".Parcela::$CAMPO_VALOR.")".
+                          " from ".Parcela::$TABELA." p, ".Transacao::$TABELA." t".
+                          " where p.".Parcela::$CAMPO_IDTRANSACAO." = t.".Transacao::$CAMPO_IDTRANSACAO.
+                          " and t.".Transacao::$CAMPO_TIPO." = 2".
+                          " and p.".Parcela::$CAMPO_PAGO." = 0".
+                          " and t.".Transacao::$CAMPO_IDUSUARIO." = ".$_SESSION[SESSION_USER_ID]);
       if (geraNumeroLinhas($result) > 0) {
           if ($transacoes = geraArrayQuery($result)) {
             return $transacoes[0];
