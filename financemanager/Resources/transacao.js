@@ -1,8 +1,21 @@
 $(document).ready(function() {
+	$("input:reset").click(function(e, a) {
+		$("#editando").html("");
+		$("#idTransacao").val("");
+		$("#msg").html("");
+	});
+
 	$("#submit").click(function(e) {
 		e.preventDefault();
 
 		var tipo = $("#tipo").val();
+
+		if(document.getElementById("receita").checked) {
+			tipo = 1;
+		} else if (document.getElementById("despesa").checked) {
+			tipo = 2;
+		}
+
 		var descricao = $("#descricao").val();
 		var idcategoria = $("#idcategoria").val();
 		var data = $("#data").val();
@@ -123,6 +136,28 @@ $(document).ready(function() {
 	});
 });
 
+function deletar(idTransacao) {
+	var dados = {
+		"idTransacao" : idTransacao
+	};
+	exibirMensagemStatus("Excluindo, aguarde...");
+	$.ajax({
+		type : "post",
+		url : "../controller/TransacaoController.php?operacao=excluir",
+		dataType : "json",
+		data : dados,
+		success : function(result) {
+			//exibirMensagem(result.erro, result.msg);
+			exibirMensagemPadrao(result);
+			excluirTransacaoTabela(idTransacao);	
+		},
+		error : function(result, txt) {
+			console.log(result);
+			//exibirMensagem(-1, txt);
+			exibirMensagemPadrao(result);
+		}
+	});	
+}
 
 function jsonConcat(o1, o2) {
 	for (var key in o2) {
@@ -131,24 +166,11 @@ function jsonConcat(o1, o2) {
 	return o1;
 }
 
-/*
-Script desenvolvido por: klonder
-Postagem exclusiva em: http://www.forum.imasters.com.br
-Liberado para uso e modificação.
-*/
-
-//Não altere esses valores!
 var iCount = 0;
 var iCampos = 1;
 var hidden1; 
-
-
-//Definindo quantos campos poderão ser criados (máximo);
 var iCamposTotal = 10; 
 
-
-
-//Função que adiciona os campos;
 function addInput() {   
 if (iCampos <= iCamposTotal) {
  	//hidden1 = document.getElementById("hidden1");

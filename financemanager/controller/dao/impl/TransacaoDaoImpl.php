@@ -2,6 +2,9 @@
 require_once("../controller/dao/DAO.php");
 require_once("../controller/dao/util/ConnectionMySql.php");
 require_once("../model/Transacao.php");
+require_once ("../controller/dao/impl/ParcelaDaoImpl.php");
+require_once("../model/Categoria.php");
+require_once("../model/Pessoa.php");
 
   class TransacaoDaoImpl implements DAO {
 
@@ -11,7 +14,14 @@ require_once("../model/Transacao.php");
     }
     
     public function excluir($identificador) {
-      geraQuery("DELETE FROM ".Transacao::$TABELA." WHERE ".Transacao::$CAMPO_IDTRANSACAO." = ".$identificador);
+        $parcelaDao = new ParcelaDaoImpl();
+        $result = $parcelaDao->listarPorIdTransacao($identificador);
+        while ($parcela = $result->fetch_array()) {
+          $parcelaDao->excluir($parcela[0]);
+        }
+
+      $result = performQuery("DELETE FROM ".Transacao::$TABELA." WHERE ".Transacao::$CAMPO_IDTRANSACAO." = ".$identificador);
+      return $result;
     }
     
     public function buscar($identificador) {
@@ -30,9 +40,25 @@ require_once("../model/Transacao.php");
       throw new Exception("Função listar não implementada.");
     }
     
-    public function listarTodos() {
+    /*public function listarTodos() {
       $result = geraQuery("select ".Transacao::$CAMPO_IDTRANSACAO.", ".Transacao::$CAMPO_DESCRICAO.", ".Transacao::$CAMPO_TIPO.", ".Transacao::$CAMPO_DATA.", ".Transacao::$CAMPO_IDUSUARIO.", ".Transacao::$CAMPO_IDPESSOA.", ".Transacao::$CAMPO_IDCATEGORIA.
                             " from ".Transacao::$TABELA);
+      return $result;
+    }*/
+
+    public function listarTodos() {
+      $result = performQuery("select ".Transacao::$CAMPO_IDTRANSACAO.", ".Transacao::$CAMPO_DESCRICAO.", ".Transacao::$CAMPO_TIPO.", ".Transacao::$CAMPO_DATA.", ".Transacao::$CAMPO_IDUSUARIO.", ".Transacao::$CAMPO_IDPESSOA.", ".Transacao::$CAMPO_IDCATEGORIA.
+                            " from ".Transacao::$TABELA);
+    
+      return $result;
+    }
+
+    public function listarTodosDoUsuario($identificador) {
+      $result = performQuery("select T.".Transacao::$CAMPO_IDTRANSACAO.", T.".Transacao::$CAMPO_DESCRICAO.", T.".Transacao::$CAMPO_TIPO.", T.".Transacao::$CAMPO_DATA.", T.".Transacao::$CAMPO_IDUSUARIO.", P.".Pessoa::$CAMPO_NOME." pessoa, C.".Categoria::$CAMPO_DESCRICAO." categoria".
+                            " from ".Transacao::$TABELA." T, ".Categoria::$TABELA." C, ".Pessoa::$TABELA." P".
+                            " where T.".Transacao::$CAMPO_IDCATEGORIA." = C.".Categoria::$CAMPO_ID.
+                            " and T.".Transacao::$CAMPO_IDPESSOA." = P.".Pessoa::$CAMPO_IDPESSOA.
+                            " and T.".Transacao::$CAMPO_IDUSUARIO." = '".$identificador."'");    
       return $result;
     }
     

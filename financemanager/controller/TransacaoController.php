@@ -13,33 +13,6 @@ $msgRetorno = array (
 		"msg" => "Erro indefinido" 
 );
 
-switch ($_SERVER ['REQUEST_METHOD']) {
-	case 'POST' :
-		switch ($_POST ["operacao"]) {
-			case 'salvar' :
-				$msgRetorno = salvar($msgRetorno);
-				break;
-		}
-		break;
-	// Não consegui pegar as varáveis via $_REQUEST com o PUT
-	/*
-	 * case 'PUT':
-	 * $msgRetorno["erro"] = salvar();
-	 * break;
-	 * case 'DELETE':
-	 * $msgRetorno["erro"] = 999;
-	 * $msgRetorno["msg"] = "DELETE Ainda não implementado";
-	 * break;
-	 */
-	/*case 'GET' :
-		$msgRetorno ["erro"] = 999;
-		$msgRetorno ["msg"] = "GET Ainda não implementado";
-		break;*/
-}
-
-$jsonFormat = json_encode ( $msgRetorno );
-print ($jsonFormat) ;
-
 function salvar($msgRetorno) {
 	$msgRetorno = array (
 			"erro" => 0,
@@ -118,6 +91,49 @@ function salvar($msgRetorno) {
     }
 	return $msgRetorno;
 }
+
+function excluir($idTransacao) {
+	$daoTr = new TransacaoDaoImpl();
+	$result = $daoTr->excluir ( $idTransacao );
+	if (! $result) {
+		return criaMensagemRetorno ( 1, "Erro ao excluir a transação" );
+	} else {
+		return criaMensagemRetorno ( 0, "Transação excluida com sucesso" );
+	}
+}
+
+function listarTransacoes() {
+	$daoTr = new TransacaoDaoImpl();
+	session_start ();
+	$transacoes = $daoTr->listarTodosDoUsuario($_SESSION [SESSION_USER_ID]); ////////// PEGAR DA SESSÃO
+	return $transacoes;
+}
+
+//defineHeaderRetornoJson();
+// $retorno = criaMensagemRetorno ( 9999, "REQUEST_METHOD:" . $_SERVER ['REQUEST_METHOD'] );
+
+switch ($_SERVER ['REQUEST_METHOD']) {
+	case 'GET' :
+		// Por padrão retorna todas as transações
+		$mysqliResult = listarTransacoes();
+		//$arquivos = $mysqliResult->fetch_all ( MYSQLI_ASSOC );
+		$msgRetorno = $mysqliResult->fetch_all ( MYSQLI_ASSOC );
+		break;
+	case 'POST' :
+		//defineHeaderRetornoJson();
+		switch ($_GET ["operacao"]) {
+			case 'salvar' :
+				$msgRetorno = salvar($msgRetorno);
+				break;
+			case 'excluir' :
+				$msgRetorno = excluir ( $_POST ["idTransacao"] );
+				break;
+		}
+		break;
+}
+
+$jsonFormat = json_encode ( $msgRetorno );
+print ($jsonFormat) ;
 
 ?>
 

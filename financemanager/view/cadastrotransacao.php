@@ -23,8 +23,8 @@
 	<section>
 		<form method="post" action="">
 			<div class="formulario">
-				<input type="radio" name="tipo" value="1" id="tipo" checked> <label for="receita">Receita</label>
-				<input type="radio" name="tipo" value="2" id="tipo"> <label for="despesa">Despesa</label>
+				<input type="radio" name="tipo" id="receita" value="1" checked> <label for="receita">Receita</label>
+				<input type="radio" name="tipo" id="despesa" value="2"> <label for="despesa">Despesa</label>
 			</div>
 			<label class="formulario" for="descricao">Descrição</label> 
 			<input type="text" id="descricao" name="descricao" maxlength="150"/> <br/>

@@ -41,8 +41,14 @@ require_once("../model/Parcela.php");
     }
     
     public function listarTodos() {
-      $result = geraQuery("select ".Parcela::$CAMPO_IDPARCELA.", ".Parcela::$CAMPO_VALOR.", ".Parcela::$CAMPO_DATAPAGAMENTO.", ".Parcela::$CAMPO_DATAVENCIMENTO.", ".Parcela::$CAMPO_PAGO.", ".Parcela::$CAMPO_IDTRANSACAO.
+      $result = performQuery("select ".Parcela::$CAMPO_IDPARCELA.", ".Parcela::$CAMPO_VALOR.", ".Parcela::$CAMPO_DATAPAGAMENTO.", ".Parcela::$CAMPO_DATAVENCIMENTO.", ".Parcela::$CAMPO_PAGO.", ".Parcela::$CAMPO_IDTRANSACAO.
                             " from ".Parcela::$TABELA);
+      return $result;
+    } 
+
+    public function listarPorIdTransacao($identificador) {
+      $result = performQuery("select ".Parcela::$CAMPO_IDPARCELA.", ".Parcela::$CAMPO_VALOR.", ".Parcela::$CAMPO_DATAPAGAMENTO.", ".Parcela::$CAMPO_DATAVENCIMENTO.", ".Parcela::$CAMPO_PAGO.", ".Parcela::$CAMPO_IDTRANSACAO.
+                            " from ".Parcela::$TABELA." where ".Parcela::$CAMPO_IDTRANSACAO." = '".$identificador."'");
       return $result;
     }
     
