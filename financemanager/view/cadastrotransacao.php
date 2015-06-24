@@ -22,13 +22,13 @@
 	<?php include("componenteNavegacao.html") ?>
 	<section>
 		<form method="post" action="">
-			<div class="formulario transacao">
+			<div class="formulario">
 				<input type="radio" name="tipo" value="1" id="tipo" checked> <label for="receita">Receita</label>
 				<input type="radio" name="tipo" value="2" id="tipo"> <label for="despesa">Despesa</label>
 			</div>
-			<label class="formulario transacao" for="descricao">Descrição</label> 
+			<label class="formulario" for="descricao">Descrição</label> 
 			<input type="text" id="descricao" name="descricao" maxlength="150"/> <br/>
-			<label class="formulario transacao" for="categoria">Categoria</label> 
+			<label class="formulario" for="categoria">Categoria</label> 
 			<select id="idcategoria" name="idcategoria" >
 			<?php
 				$categoriaDao = new CategoriaDaoImpl();
@@ -39,9 +39,8 @@
 			?>
 			</select> <br/>
 			<input type="hidden" id="idusuario" name="idusuario" value=<?php echo '"'.$_SESSION[SESSION_USER_ID].'"' ?>/>
-			<label class="formulario transacao" for="data">Data</label> 
-			<input type="date" id="data" name="data"/> <br/>
-			<label class="formulario transacao" for="pessoa">Pessoa</label> 
+			<input type="hidden" id="data" name="data" value=<?php echo '"'.date('y-m-d') .'"' ?>/>
+			<label class="formulario" for="pessoa">Pessoa</label> 
 			<select id="idpessoa" name="idpessoa" >
 			<?php
 				$pessoaDao = new PessoaDaoImpl();
@@ -50,31 +49,14 @@
 					echo '<option value="'.$pessoa[0].'">'.$pessoa[1].'</option>';
 				}
 			?>
-			</select> <br/>
-			<!--<br/>
-			<label class="formulario transacao" for="Parcelas">Parcelas</label> <br/>
-			<label class="formulario transacao" for="pago">Pago?</label> 
-			<label class="formulario transacao" for="valor">Valor</label> 
-			<label class="formulario transacao" for="datavencimento">Data de vencimento</label> 
-			<label class="formulario transacao" for="datapagamento">Data de pagamento</label> <br/>
-			<?php
-				for($i = 1; $i < 5; $i++) {
-					echo '<select name="pago'.$i.'">'.
-						 '<option value="0">Não</option>'.
-						 '<option value="1">Sim</option>'.
-						 '</select>'.
-						 '<input type="text" name="valor'.$i.'" maxlength="50"/> '.
-						 '<input type="date" name="datavencimento'.$i.'"/> '.
-						 '<input type="date" name="datapagamento'.$i.'"/> </br>';
-				}
-			?> -->
+			</select> <br/> </br>
 
 			<input type="button" value="Adicionar parcela" name="add_input" id="add_input" onClick="addInput();">  
-			<div id="camposTexto"></div>
+			<label id="parcelas"></label>
 			<br><input type="hidden" name="count" id="count" value="">
 
 			<input type="submit" name="submit" id="submit" value="Cadastrar" /> 
-			<input type="reset" value="Limpar" /> <br>
+			<input type="reset" value="Limpar" /> </br>
 		</form>
 		<div id="msg"></div>
 	</section>

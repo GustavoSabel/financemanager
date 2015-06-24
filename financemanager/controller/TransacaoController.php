@@ -71,36 +71,29 @@ function salvar($msgRetorno) {
 
 		if(!isset($_REQUEST["valor"])) {
 			$msgRetorno ["msg"] = "Não é possível efetuar transações sem parcelas.";
-			$msgRetorno ["erro"] = 7;
+			$msgRetorno ["erro"] = 8;
 		}
 		$vetorValor = $_REQUEST["valor"];
-		$numeroParcelas = $_REQUEST ["numeroparcelas"];
-		for($i = 1; $i < $numeroParcelas; $i++) {
-			
+		$vetorPago = $_REQUEST["pago"];
+		$vetorDataVencimento = $_REQUEST["datavencimento"];
+		$vetorDataPagamento = $_REQUEST["datapagamento"];
+		$numeroParcelas = $_REQUEST["numeroparcelas"];
+
+		for($i = 0; $i < $numeroParcelas; $i++) {
+			if ((trim($vetorValor[$i]) == "") || ($vetorValor[$i] == 0)) {
+				$msgRetorno ["msg"] = "Valor da parcela ".$i." não informado.";
+				$msgRetorno ["erro"] = 9;	
+			} else if (trim($vetorPago[$i]) == "") {
+				$msgRetorno ["msg"] = "Não foi informado se a parcela ".$i." foi paga.";
+				$msgRetorno ["erro"] = 10;	
+			} else if (trim($vetorDataVencimento[$i]) == "") {
+				$msgRetorno ["msg"] = "Data de vencimento da parcela ".$i." não informada.";
+				$msgRetorno ["erro"] = 11;	
+			} else if (trim($vetorDataPagamento[$i]) == "") {
+				$msgRetorno ["msg"] = "Data de pagamento da parcela ".$i." não informada.";
+				$msgRetorno ["erro"] = 12;	
+			}
 		}
-
-
-
-    	/*$numeroParcelas = 0;
-	    for($i = 1; $i < 5; $i++) {
-	    	if((isset($_REQUEST["valor".$i])) && (trim($_REQUEST["valor".$i]) != "")) {
-	        	if (trim($_REQUEST["datavencimento".$i]) == "") {
-	          		$msgRetorno ["msg"] = "Data de vencimento não informada.";
-			  		$msgRetorno ["erro"] = 7;
-	        	}
-	        	if (trim($_REQUEST["datapagamento".$i]) == "") {
-	          		$msgRetorno ["msg"] = "Data de pagamento não informada.";
-			  		$msgRetorno ["erro"] = 8;
-	        	}
-	        	$numeroParcelas++;
-	      	}
-	    }
-
-
-	    if ($numeroParcelas == 0) {
-	    	$msgRetorno ["msg"] = "Não é possível efetuar transações sem parcelas.";
-	    	$msgRetorno ["erro"] = 9;
-	    }*/
 
 	    $transacaoDao = new TransacaoDaoImpl();
 	    $idtransacao = $transacaoDao->getProximoId();
@@ -112,11 +105,9 @@ function salvar($msgRetorno) {
 			$msgRetorno ["erro"] = 10;
 	    } 
 
-
 	    $parcelaDao = new ParcelaDaoImpl();
-	    for($i = 1; $i < 5; $i++) {
-	    	if((isset($_POST["valor".$i])) && (trim($_POST["valor".$i]) != "")) {
-	    		$parcela = new Parcela(0, $_POST["valor".$i], $_POST["datapagamento".$i], $_POST["datavencimento".$i], $_POST["pago".$i], $idtransacao);
+	    for($i = 0; $i < $numeroParcelas; $i++) {
+			$parcela = new Parcela(0, $vetorValor[$i], $vetorDataPagamento[$i], $vetorDataVencimento[$i], $vetorPago[$i], $idtransacao);
 	        	try {
 	          		$parcelaDao->salvar($parcela);
 	        	} catch (Exception $e) {
@@ -124,7 +115,6 @@ function salvar($msgRetorno) {
 			  		$msgRetorno ["erro"] = 11;
 	        	}
 	      	}
-	    }
     }
 	return $msgRetorno;
 }
